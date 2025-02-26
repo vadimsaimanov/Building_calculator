@@ -1,0 +1,220 @@
+/* Основные стили для шапки */
+.header {
+    display: flex;
+    flex-direction: column; /* Элементы выстраиваются в колонку */
+    align-items: flex-start; /* Выравнивание по левому краю */
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+    position: relative; /* Для позиционирования заголовка */
+}
+
+/* Контейнер для логотипа и информации о клиенте */
+.logo-and-client-info {
+    display: flex;
+    align-items: flex-start; /* Выравнивание по верхнему краю */
+    gap: 20px; /* Отступ между логотипом и информацией о клиенте */
+}
+
+/* Стили для логотипа */
+#logo {
+    max-width: 12%; /* Размер логотипа */
+    height: auto;
+}
+
+/* Блок с информацией о клиенте */
+.client-info {
+    text-align: left;
+}
+
+.client-info p {
+    margin: 5px 0; /* Уменьшение отступов между строками */
+    font-size: 14px;
+}
+
+.client-info strong {
+    font-weight: bold;
+}
+
+/* Заголовок "Карточка клиента" */
+h1 {
+    text-align: center;
+    width: 100%;
+    position: absolute; /* Абсолютное позиционирование */
+    top: 50%; /* Сдвиг вниз на 50% */
+    left: 50%; /* Сдвиг вправо на 50% */
+    transform: translate(-50%, -50%); /* Центрирование */
+    margin: 0; /* Убираем отступы */
+}
+
+
+/* Блок с именем и должностью */
+.info {
+    text-align: right;
+    position: absolute; /* Абсолютное позиционирование */
+    top: 70px; /* Отступ сверху (регулируйте по необходимости) */
+    right: 60px; /* Отступ справа */
+}
+
+.info p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.info p:first-child {
+    margin-bottom: 5px; /* Отступ между именем и должностью */
+}
+
+/* Стили для блока с действиями (стрелка и кнопка) */
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Выравнивание по левому краю */
+    gap: 10px; /* Отступ между элементами */
+    margin-top: 10px; /* Отступ сверху */
+    margin-left: 0; /* Убираем отступ слева */
+}
+
+/* Иконка стрелки */
+.bi-arrow-left {
+    font-size: 25px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.bi-arrow-left:hover {
+    color: #0056b3; /* Изменение цвета при наведении */
+}
+
+/* Кнопка "Создать расчет" */
+.btn-warning {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Плавный переход цвета */
+    background-color: #ffc107;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800; /* Изменение цвета при наведении */
+}
+
+/* Стили для сетки расчетов */
+.client-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Стили для каждого блока расчета */
+.calculation {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100px;
+}
+
+.calculation:hover {
+    transform: translateY(-5px); /* Эффект поднятия при наведении */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+}
+
+/* Стили для данных расчета */
+.calculation-number,
+.calculation-date,
+.calculation-status,
+.calculation-address {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.calculation-number {
+    font-weight: bold;
+}
+
+.calculation-date {
+    color: #666;
+}
+
+.calculation-status {
+    color: #333;
+}
+
+.calculation-address {
+    color: #333;
+}
+
+/* Блок с иконками действий */
+.calculation-actions {
+    display: flex;
+    align-items: center;
+    width: 100px; /* Фиксированная ширина для иконок */
+    justify-content: flex-end; /* Выравнивание по правому краю */
+}
+
+.calculation-actions i {
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: color 0.3s;
+}
+
+.calculation-actions i:hover {
+    color: #0056b3; /* Изменение цвета при наведении */
+}
+
+/* Стили для модального окна */
+.modal-content {
+    border-radius: 8px; /* Скругленные углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень */
+}
+
+.modal-header {
+    border-bottom: 1px solid #ddd; /* Граница внизу заголовка */
+    padding: 15px 20px; /* Отступы внутри заголовка */
+}
+
+.modal-title {
+    font-size: 18px; /* Размер шрифта заголовка */
+    font-weight: bold; /* Жирный шрифт */
+}
+
+.modal-body {
+    padding: 20px; /* Отступы внутри тела модального окна */
+}
+
+.modal-footer {
+    border-top: 1px solid #ddd; /* Граница вверху подвала */
+    padding: 10px 20px; /* Отступы внутри подвала */
+}
+
+/* Стили для кнопок в модальном окне */
+.modal-body .btn {
+    width: 100%; /* Полная ширина кнопок */
+    padding: 10px; /* Отступы внутри кнопок */
+    margin-bottom: 10px; /* Отступ снизу для кнопок */
+    text-align: left; /* Выравнивание текста по левому краю */
+    border: 1px solid #ddd; /* Граница кнопок */
+    border-radius: 4px; /* Скругленные углы кнопок */
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход цвета */
+}
+
+.modal-body .btn:hover {
+    background-color: #f8f9fa; /* Цвет фона при наведении */
+    color: #0056b3; /* Цвет текста при наведении */
+}
+
+.modal-body .btn i {
+    margin-right: 10px; /* Отступ справа от иконки */
+}
