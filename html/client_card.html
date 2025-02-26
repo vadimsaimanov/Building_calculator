@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/client_card.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="../js/scripts.js" defer></script>
+    <title>Карточка клиента</title>
+</head>
+<body>
+<div class="header">
+    <!-- Логотип и информация о клиенте -->
+    <div class="logo-and-client-info">
+        <img id="logo" src="../images/Logo.png" alt="Logo">
+        <div class="client-info">
+            <p><strong>Клиент:</strong> Тестовый Тест Тестович</p>
+            <p><strong>Адрес:</strong> г. Ульяновск, ул. Тестовая, д. 35-45</p>
+            <p><strong>Телефон:</strong> 8-900-000-00-00</p>
+        </div>
+    </div>
+
+    <!-- Блок с действиями (стрелка и кнопка) -->
+    <div class="actions">
+        <i class="bi bi-arrow-left"></i>
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createCalculationModal">
+            Создать расчет
+        </button>
+    </div>
+
+    <!-- Заголовок "Карточка клиента" -->
+    <h1>Карточка клиента</h1>
+
+    <!-- Блок с именем и должностью -->
+    <div class="info">
+        <p>Имя Фамилия</p>
+        <p>Должность</p>
+    </div>
+</div>
+
+<!-- Тело страницы с блоками расчетов -->
+<div class="client-grid">
+    <div class="calculation" onclick="openCalculationPage(1)">
+        <div class="calculation-number">Расчет №1</div>
+        <div class="calculation-date">02.02.2021</div>
+        <div class="calculation-status">Актуален</div>
+        <div class="calculation-address">г. Ульяновск, ул. Тестовая, д. 35-45</div>
+        <div class="calculation-actions">
+            <i class="bi bi-copy"></i>
+            <i class="bi bi-trash"></i>
+        </div>
+    </div>
+    <div class="calculation" onclick="openCalculationPage(2)">
+        <div class="calculation-number">Расчет №2</div>
+        <div class="calculation-date">03.03.2022</div>
+        <div class="calculation-status">Не актуален</div>
+        <div class="calculation-address">г. Ульяновск, ул. Ленина, д. 5</div>
+        <div class="calculation-actions">
+            <i class="bi bi-copy"></i>
+            <i class="bi bi-trash"></i>
+        </div>
+    </div>
+    <div class="calculation" onclick="openCalculationPage(3)">
+        <div class="calculation-number">Расчет №3</div>
+        <div class="calculation-date">04.04.2023</div>
+        <div class="calculation-status">Заключен договор</div>
+        <div class="calculation-address">г. Ульяновск, ул. Строителей, д. 10</div>
+        <div class="calculation-actions">
+            <i class="bi bi-copy"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно для выбора конструктивного элемента -->
+<div class="modal fade" id="createCalculationModal" tabindex="-1" aria-labelledby="createCalculationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createCalculationModalLabel">Выбор конструктивного элемента</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-column align-items-start">
+                    <button type="button" class="btn btn-light d-flex align-items-center">
+                        <i class="bi bi-house-add me-2"></i> Каркас
+                    </button>
+                    <button type="button" class="btn btn-light d-flex align-items-center mt-2">
+                        <i class="bi bi-house-add me-2"></i> Фундамент
+                    </button>
+                    <button type="button" class="btn btn-light d-flex align-items-center mt-2">
+                        <i class="bi bi-house-add me-2"></i> Крыша
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
