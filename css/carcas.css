@@ -1,0 +1,164 @@
+/* Основные стили для шапки */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+    position: relative;
+}
+
+/* Контейнер для логотипа и информации о клиенте */
+.logo-and-client-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Стили для логотипа */
+#logo {
+    max-width: 8%; /* Уменьшенный размер логотипа */
+    height: auto;
+}
+
+/* Блок с информацией о клиенте */
+.client-info {
+    text-align: left;
+    flex: 1;
+}
+
+.client-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.client-info strong {
+    font-weight: bold;
+}
+
+/* Заголовок "Каркас" */
+h1 {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+/* Блок с именем и должностью */
+.info {
+    text-align: right;
+    position: absolute;
+    top: 70px;
+    right: 60px;
+}
+
+.info p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.info p:first-child {
+    margin-bottom: 5px;
+}
+
+/* Стили для блока с действиями (стрелка) */
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+/* Иконка стрелки */
+.bi-arrow-left {
+    font-size: 25px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.bi-arrow-left:hover {
+    color: #0056b3;
+}
+
+/* Стили для контейнера с полем ввода адреса и кнопками */
+.address-input-container {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+}
+
+.address-input-container .form-control {
+    flex: 1;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.address-input-container .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.address-input-container .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.address-input-container .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Основные стили для контейнера с исходными данными */
+.source-data-container {
+    padding: 20px 40px; /* Отступы слева и справа */
+}
+
+/* Отступы для заголовков */
+.source-data-container h2,
+.source-data-container h3,
+.source-data-container h4 {
+    margin-bottom: 20px;
+}
+
+/* Отступы между разделами */
+.spacer {
+    margin-bottom: 20px;
+}
+
+/* Стили для формы */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Стили для полей ввода и селекторов */
+.form-control {
+    width: calc(100% - 80px); /* Уменьшаем ширину полей ввода и селекторов */
+    display: inline-block;
+}
+
+/* Стили для иконок */
+.add-calculation i {
+    margin-right: 10px;
+}
+
+/* Стили для подзаголовков */
+.subsection span {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Стили для кнопки */
+.btn-primary {
+    margin-top: 20px;
+}
+
