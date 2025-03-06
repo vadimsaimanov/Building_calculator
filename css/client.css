@@ -7,10 +7,13 @@
     padding: 10px;
     box-sizing: border-box;
     background-color: #fff;
+    position: relative; /* Добавляем position: relative для абсолютного позиционирования заголовка */
 }
-.body{
+
+.body {
     background-color: #fff;
 }
+
 /* Контейнер для логотипа и блока с действиями */
 .logo-and-actions {
     display: flex;               /* Включаем Flexbox */
@@ -27,6 +30,9 @@
 h1 {
     margin: 0;                  /* Убираем внешний отступ */
     text-align: center;         /* Центрирование текста внутри заголовка */
+    position: absolute;         /* Абсолютное позиционирование */
+    left: 50%;                 /* Центрирование по горизонтали */
+    transform: translateX(-50%); /* Сдвиг на 50% влево для точного центрирования */
 }
 
 /* Блок с информацией (Имя + Должность) */
