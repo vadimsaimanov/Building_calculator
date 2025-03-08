@@ -1,6 +1,7 @@
 async function OnClicklogin() {
-    const login = 'ivanov';
-    const password = 'password';
+    const login = document.getElementById('user_name').value;
+    //const login = 'ivanovv';
+    const password = document.getElementById('user_pass').value;
 
     try {
         const response = await fetch('/login', {
