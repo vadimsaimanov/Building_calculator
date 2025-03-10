@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/carcas.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="../js/scripts.js" defer></script>
+    <title>Каркас</title>
+</head>
+<body>
+<div class="header">
+    <!-- Логотип и информация о клиенте -->
+    <div class="logo-and-client-info">
+        <img id="logo" src="../images/Logo.png" alt="Logo">
+        <div class="client-info">
+            <p><strong>Клиент:</strong> Тестовый Тест Тестович</p>
+            <p><strong>Адрес:</strong> г. Ульяновск, ул. Тестовая, д. 35-45</p>
+            <p><strong>Телефон:</strong> 8-900-000-00-00</p>
+        </div>
+    </div>
+
+    <!-- Блок с действиями (стрелка) -->
+    <div class="actions">
+        <i class="bi bi-arrow-left"></i>
+    </div>
+
+    <!-- Заголовок "Каркас" -->
+    <h1>Каркас</h1>
+
+    <!-- Блок с именем и должностью -->
+    <div class="info">
+        <p>Имя Фамилия</p>
+        <p>Должность</p>
+    </div>
+</div>
+
+<!-- Поле для ввода адреса и кнопки -->
+<div class="address-input-container">
+    <input type="text" class="form-control" id="addressInput" placeholder="Добавить адрес объекта строительства">
+    <button type="button" class="btn btn-success">Сохранить</button>
+    <button type="button" class="btn btn-danger">Очистить расчет</button>
+</div>
+
+<!-- Контейнер для исходных данных -->
+<div class="source-data-container">
+    <h4>Исходные данные</h4>
+    <div class="spacer"></div>
+    <div class="form-group">
+        <label for="floorCount">Количество этажей</label>
+        <select class="form-control" id="floorCount">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+    </div>
+    <h6>1 этаж</h6>
+    <div class="form-group">
+        <label for="floorHeight">Высота этажа</label>
+        <input type="text" class="form-control" id="floorHeight" placeholder="Введите высоту">
+    </div>
+    <div class="form-group">
+        <label for="wallPerimeter">Периметр внешних стен</label>
+        <input type="text" class="form-control" id="wallPerimeter" placeholder="Введите периметр">
+    </div>
+    <div class="form-group">
+        <label for="baseArea">Площадь основания</label>
+        <input type="text" class="form-control" id="baseArea" placeholder="Введите площадь">
+    </div>
+    <div class="form-group">
+        <label for="wallThickness">Толщина внешних стен</label>
+        <select class="form-control" id="wallThickness">
+            <option>200 мм</option>
+            <option>250 мм</option>
+            <option>300 мм</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="innerWallLength">Длина внутренних стен</label>
+        <input type="text" class="form-control" id="innerWallLength" placeholder="Введите длину">
+    </div>
+    <div class="form-group">
+        <label for="innerWallThickness">Толщина внутренних стен</label>
+        <select class="form-control" id="innerWallThickness">
+            <option>100 мм</option>
+            <option>120 мм</option>
+            <option>150 мм</option>
+        </select>
+    </div>
+
+    <!-- Заголовок Обшивки внешних стен -->
+    <div class="spacer"></div>
+    <h6>Обшивки внешних стен</h6>
+    <div class="form-group">
+        <label for="osb">ОСБ</label>
+        <select class="form-control" id="osb">
+            <option>8 мм</option>
+            <option>10 мм</option>
+            <option>12 мм</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="vaporBarrier">Парогидроизоляция</label>
+        <select class="form-control" id="vaporBarrier">
+            <option>Пленка</option>
+            <option>Мембрана</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="windProtection">Ветрозащита</label>
+        <select class="form-control" id="windProtection">
+            <option>Сетка</option>
+            <option>Пленка</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="insulation">Утеплитель</label>
+        <select class="form-control" id="insulation">
+            <option>Минеральная вата</option>
+            <option>Пенопласт</option>
+            <option>Эковата</option>
+        </select>
+    </div>
+
+    <!-- Добавить расчет обшивки внутренних стен -->
+    <div class="add-calculation">
+        <i class="bi bi-plus-circle"></i>
+        <span>Добавить расчет обшивки внутренних стен</span>
+        <div class="form-group">
+            <label for="innerOsb">ОСБ</label>
+            <select class="form-control" id="innerOsb">
+                <option>8 мм</option>
+                <option>10 мм</option>
+                <option>12 мм</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Учесть двери и окна -->
+    <div class="spacer"></div>
+    <div class="add-calculation">
+        <i class="bi bi-plus-circle"></i>
+        <span>Учесть двери и окна</span>
+        <div class="subsection">
+            <span>Оконные проемы</span>
+            <div class="form-group">
+                <label for="windowHeight">Высота</label>
+                <input type="text" class="form-control" id="windowHeight" placeholder="Введите высоту">
+            </div>
+            <div class="form-group">
+                <label for="windowWidth">Ширина</label>
+                <input type="text" class="form-control" id="windowWidth" placeholder="Введите ширину">
+            </div>
+            <div class="form-group">
+                <label for="windowCount">Количество</label>
+                <input type="text" class="form-control" id="windowCount" placeholder="Введите количество">
+            </div>
+        </div>
+        <div class="subsection">
+            <span>Дверные проемы</span>
+            <div class="form-group">
+                <label for="doorHeight">Высота</label>
+                <input type="text" class="form-control" id="doorHeight" placeholder="Введите высоту">
+            </div>
+            <div class="form-group">
+                <label for="doorWidth">Ширина</label>
+                <input type="text" class="form-control" id="doorWidth" placeholder="Введите ширину">
+            </div>
+            <div class="form-group">
+                <label for="doorCount">Количество</label>
+                <input type="text" class="form-control" id="doorCount" placeholder="Введите количество">
+            </div>
+        </div>
+        <div class="subsection">
+            <span>Дверные проемы внутренние</span>
+            <div class="form-group">
+                <label for="innerDoorHeight">Высота</label>
+                <input type="text" class="form-control" id="innerDoorHeight" placeholder="Введите высоту">
+            </div>
+            <div class="form-group">
+                <label for="innerDoorWidth">Ширина</label>
+                <input type="text" class="form-control" id="innerDoorWidth" placeholder="Введите ширину">
+            </div>
+            <div class="form-group">
+                <label for="innerDoorCount">Количество</label>
+                <input type="text" class="form-control" id="innerDoorCount" placeholder="Введите количество">
+            </div>
+        </div>
+    </div>
+
+    <!-- Добавить расчет перекрытий -->
+    <div class="add-calculation">
+        <i class="bi bi-plus-circle"></i>
+        <span>Добавить расчет перекрытий</span>
+        <div class="form-group">
+            <label for="floorThickness">Толщина перекрытия</label>
+            <input type="text" class="form-control" id="floorThickness" placeholder="Введите толщину">
+        </div>
+        <div class="form-group">
+            <label for="floorOsb">ОСБ</label>
+            <select class="form-control" id="floorOsb">
+                <option>8 мм</option>
+                <option>10 мм</option>
+                <option>12 мм</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="floorVaporBarrier">Парогидроизоляция</label>
+            <select class="form-control" id="floorVaporBarrier">
+                <option>Пленка</option>
+                <option>Мембрана</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="floorWindProtection">Ветрозащита</label>
+            <select class="form-control" id="floorWindProtection">
+                <option>Сетка</option>
+                <option>Пленка</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="floorInsulation">Утеплитель</label>
+            <select class="form-control" id="floorInsulation">
+                <option>Минеральная вата</option>
+                <option>Пенопласт</option>
+                <option>Эковата</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Кнопка Рассчитать -->
+    <button type="button" class="btn btn-primary">Рассчитать</button>
+    <div class="spacer"></div>
+</div>
+
+
+
+</body>
+</html>
