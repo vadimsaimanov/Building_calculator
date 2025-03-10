@@ -15,9 +15,14 @@ const addClient = async (secondname, name, lastname, phone, email, adress, manag
     );
     return results;
 };
+const getClientById = async (clientId) => {
+    const [results] = await db.query('SELECT * FROM customers WHERE id = ?', [clientId]);
+    return results;
+};
 
 module.exports = {
     login,
     addClient,
-    getClients
+    getClients,
+    getClientById
 };
