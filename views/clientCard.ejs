@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="../js/scripts.js" defer></script>
+    <script src="../javascripts/scriptsClient.js" ></script>
     <title>Карточка клиента</title>
 </head>
 <body>
@@ -23,7 +24,7 @@
 
     <!-- Блок с действиями (стрелка и кнопка) -->
     <div class="actions">
-        <i class="bi bi-arrow-left"></i>
+        <i class="bi bi-arrow-left" onclick="goBack()"></i> <!-- Добавляем обработчик -->
         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createCalculationModal">
             Создать расчет
         </button>
@@ -82,7 +83,7 @@
             </div>
             <div class="modal-body">
                 <div class="d-flex flex-column align-items-start">
-                    <button type="button" class="btn btn-light d-flex align-items-center">
+                    <button type="button" class="btn btn-light d-flex align-items-center" onclick="openCarcasPage(<%= client.id %>)">
                         <i class="bi bi-house-add me-2"></i> Каркас
                     </button>
                     <button type="button" class="btn btn-light d-flex align-items-center mt-2">

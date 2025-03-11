@@ -13,7 +13,7 @@ var carcasRouter = require('./routes/carcas');
 
 var app = express();
 
-// view engine setup
+// Настройка EJS
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Маршруты
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
@@ -30,20 +31,42 @@ app.use('/client', clientRouter);
 app.use('/clientCard', clientCardRouter);
 app.use('/carcas', carcasRouter);
 
-// catch 404 and forward to error handler
+// Маршрут для страницы каркаса клиента
+app.get('/clientCard/:clientId/carcas', (req, res) => {
+  const clientId = req.params.clientId;
+
+  // Здесь можно получить данные клиента из базы данных по clientId
+  const client = {
+    id: clientId,
+    last_name: 'Иванов',
+    first_name: 'Иван',
+    second_name: 'Иванович',
+    adress: 'г. Ульяновск, ул. Тестовая, д. 35-45',
+    phone: '+7 (999) 123-45-67'
+  };
+
+  // Рендерим страницу carcas.ejs с данными клиента
+  res.render('carcas', { client });
+});
+
+// Обработка ошибки 404
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// Обработка ошибок
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+// Запуск сервера
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Сервер запущен на http://localhost:${PORT}`);
 });
 
 module.exports = app;
