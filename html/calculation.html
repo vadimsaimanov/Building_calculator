@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/calculation.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="../js/scripts.js" defer></script>
+    <title>Расчет</title>
+</head>
+<body>
+<div class="header">
+    <!-- Логотип и информация о клиенте -->
+    <div class="logo-and-client-info">
+        <img id="logo" src="../images/Logo.png" alt="Logo">
+        <div class="client-info">
+            <p><strong>Клиент:</strong> Тестовый Тест Тестович</p>
+            <p><strong>Адрес:</strong> г. Ульяновск, ул. Тестовая, д. 35-45</p>
+            <p><strong>Телефон:</strong> 8-900-000-00-00</p>
+        </div>
+    </div>
+
+    <!-- Стрелка и информация о дате и адресе -->
+    <div class="actions">
+        <i class="bi bi-arrow-left"></i>
+        <div class="address-info">
+            <p>Дата: 22.03.2021</p>
+            <p>Адрес объекта: г. Такой, ул.Такая, д.25</p>
+        </div>
+    </div>
+
+    <!-- Заголовок "Расчет" и кнопка "Статус" -->
+    <div class="header-center">
+        <h1>Расчет</h1>
+        <button type="button" class="btn btn-primary" id="statusButton">Статус</button>
+    </div>
+
+    <!-- Блок с именем и должностью -->
+    <div class="info">
+        <p>Имя Фамилия</p>
+        <p>Должность</p>
+    </div>
+</div>
+
+<!-- Результат расчета каркаса -->
+<div class="result-container">
+    <i class="bi bi-plus-circle"></i>
+    <span>Результат расчета каркаса</span>
+    <i class="bi bi-pen" title="Редактировать"></i>
+</div>
+
+<div class="container mt-3">
+    <h3>Результат расчета 1 этажа</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th></th>  <!-- Пустой заголовок -->
+                <th>Материал</th>
+                <th>Ед. измерения</th>
+                <th>Количество</th>
+                <th>Стоимость материалов</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="4">Внешние стены</td>
+                <td class="text-right"></td> <!--  Здесь будет цена справа -->
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4">Внутренние стены</td>
+                <td class="text-right"></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4">Перекрытия</td>
+                <td class="text-right"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5" class="text-right">Итого стоимость материалов:</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <h3>Результат расчета 2 этажа</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th></th>  <!-- Пустой заголовок -->
+                <th>Материал</th>
+                <th>Ед. измерения</th>
+                <th>Количество</th>
+                <th>Стоимость материалов</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="4">Внешние стены</td>
+                <td class="text-right"></td> <!--  Здесь будет цена справа -->
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4">Внутренние стены</td>
+                <td class="text-right"></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4">Перекрытия</td>
+                <td class="text-right"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5" class="text-right">Итого стоимость материалов:</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <p class="text-right">Итого стоимость материалов:</p>
+</div>
+<div class="modal fade" id="createClientModal" tabindex="-1" aria-labelledby="createClientModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createClientModalLabel">Создание клиента</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Фамилия</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Введите фамилию">
+                    </div>
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">Имя</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Введите имя">
+                    </div>
+                    <div class="mb-3">
+                        <label for="middleName" class="form-label">Отчество</label>
+                        <input type="text" class="form-control" id="middleName" placeholder="Введите отчество">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Телефон</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Введите телефон">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Введите email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Адрес</label>
+                        <input type="text" class="form-control" id="address" placeholder="Введите адрес">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary">Сохранить</button>
+                <button type="button" class="btn btn-warning">Редактировать</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
