@@ -3,7 +3,7 @@ const mysql = require('mysql2/promise');
 const connection = mysql.createPool({
     host: 'localhost',     // Хост БД (обычно localhost)
     user: 'root',          // Имя пользователя БД
-    password: '646464',  // Пароль к БД
+    password: '1234',  // Пароль к БД
     database: 'stroi_calc'     // Имя базы данных
 });
 

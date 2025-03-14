@@ -20,6 +20,7 @@ router.get('/:id', async function (req, res, next) {
         res.status(500).send('Ошибка сервера');
     }
 });
+
 router.post('/', async (req, res) => {
 
     // const { login, password } = req.body;
