@@ -8,7 +8,7 @@
     box-sizing: border-box;
     background-color: #fff;
     position: relative;
-    flex-wrap: wrap; /* Добавлено для адаптивности*/
+    flex-wrap: wrap; /* Добавлено для адаптивности */
 }
 
 /* Контейнер для логотипа и информации о клиенте */

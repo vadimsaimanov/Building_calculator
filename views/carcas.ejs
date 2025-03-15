@@ -2,19 +2,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/carcas.css">
+    <link rel="stylesheet" href="/css/carcas.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <script src="../js/scripts.js" defer></script>
-    <script src="../javascripts/scriptsClient.js" ></script>
+    <script src="/js/scripts.js" defer></script>
+    <script src="/javascripts/scriptsClient.js" ></script>
+    <script src="/javascripts/scriptsCarcas.js" ></script>
     <title>Каркас</title>
 </head>
-<body>
+<body onload="onLoadCarcas()">
 <div class="header">
     <!-- Логотип и информация о клиенте -->
     <div class="logo-and-client-info">
-        <img id="logo" src="../images/Logo.png" alt="Logo">
+        <img id="logo" src="/images/Logo.png" alt="Logo">
         <div class="client-info">
             <p><strong>Клиент:</strong> <%= client.last_name %> <%= client.first_name %> <%= client.second_name %></p>
             <p><strong>Адрес:</strong> <%= client.adress %></p>
@@ -32,8 +33,8 @@
 
     <!-- Блок с именем и должностью -->
     <div class="info">
-        <p>Имя Фамилия</p>
-        <p>Должность</p>
+        <p id="name">Имя Фамилия</p>
+        <p id="user-status">Должность</p>
     </div>
 </div>
 
@@ -46,7 +47,7 @@
 
 <!-- Контейнер для исходных данных -->
 <div class="source-data-container">
-    <h4>Исходные данные</h4>
+    <h2>Исходные данные</h2>
     <div class="spacer"></div>
     <div class="form-group">
         <label for="floorCount">Количество этажей</label>
@@ -56,7 +57,8 @@
             <option>3</option>
         </select>
     </div>
-    <h6>1 этаж</h6>
+    <br>
+    <h4>1 этаж</h4>
     <div class="form-group">
         <label for="floorHeight">Высота этажа</label>
         <input type="text" class="form-control" id="floorHeight" placeholder="Введите высоту">
@@ -89,10 +91,11 @@
             <option>150 мм</option>
         </select>
     </div>
+    <br>
 
     <!-- Заголовок Обшивки внешних стен -->
     <div class="spacer"></div>
-    <h6>Обшивки внешних стен</h6>
+    <h4>Обшивки внешних стен</h4>
     <div class="form-group">
         <label for="osb">ОСБ</label>
         <select class="form-control" id="osb">
@@ -123,6 +126,7 @@
             <option>Эковата</option>
         </select>
     </div>
+    <br>
 
     <!-- Добавить расчет обшивки внутренних стен -->
     <div class="add-calculation">
@@ -138,6 +142,7 @@
         </div>
     </div>
 
+    <br>
     <!-- Учесть двери и окна -->
     <div class="spacer"></div>
     <div class="add-calculation">
@@ -189,6 +194,7 @@
             </div>
         </div>
     </div>
+    <br>
 
     <!-- Добавить расчет перекрытий -->
     <div class="add-calculation">
@@ -229,6 +235,7 @@
             </select>
         </div>
     </div>
+    <br>
 
     <!-- Кнопка Рассчитать -->
     <button type="button" class="btn btn-primary">Рассчитать</button>

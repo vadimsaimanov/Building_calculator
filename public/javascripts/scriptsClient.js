@@ -53,9 +53,24 @@ function goBack() {
 }
 // Функция для перехода на страницу карточки клиента
 function openClientCard(clientId) {
-    window.location.href = `/clientCard/${clientId}`;
+    window.location.href = `/client/${clientId}`;
 }
 
+function onLoadClientCard(){
+    const name = document.getElementById('name')
+    const status = document.getElementById('user-status')
+
+    const localUser = localStorage.getItem('user');
+    if (!localUser) {
+        // Если данных нет, перенаправляем пользователя на страницу входа
+        window.location.href = '/login';
+    } else {
+        const user = JSON.parse(localUser);
+
+        name.innerHTML = `${user.first_name} ${user.last_name}`;
+        status.innerText = user.status;
+    }
+}
 // Функция для сохранения клиента
 async function OnClickSaveClient() {
     const lastName = document.getElementById('lastName').value;
@@ -90,5 +105,5 @@ async function OnClickSaveClient() {
 
 // Функция для перехода на страницу каркаса
 function openCarcasPage(clientId) {
-    window.location.href = `/clientCard/${clientId}/carcas`;
+    window.location.href = `/client/${clientId}/carcas`;
 }
