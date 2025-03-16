@@ -41,7 +41,7 @@
 <!-- Поле для ввода адреса и кнопки -->
 <div class="address-input-container">
     <input type="text" class="form-control" id="addressInput" placeholder="Добавить адрес объекта строительства">
-    <button type="button" class="btn btn-success">Сохранить</button>
+    <button type="button" class="btn btn-success" onclick="onSaveClick(<%= calculation.customer_id %>, <%= calculation.id %>, '<%= operation %>')">Сохранить</button>
     <button type="button" class="btn btn-danger">Очистить расчет</button>
 </div>
 
@@ -74,9 +74,9 @@
     <div class="form-group">
         <label for="wallThickness">Толщина внешних стен</label>
         <select class="form-control" id="wallThickness">
-            <option>200 мм</option>
-            <option>250 мм</option>
-            <option>300 мм</option>
+            <option>200</option>
+            <option>250</option>
+            <option>300</option>
         </select>
     </div>
     <div class="form-group">
@@ -86,9 +86,9 @@
     <div class="form-group">
         <label for="innerWallThickness">Толщина внутренних стен</label>
         <select class="form-control" id="innerWallThickness">
-            <option>100 мм</option>
-            <option>120 мм</option>
-            <option>150 мм</option>
+            <option>100</option>
+            <option>120</option>
+            <option>150</option>
         </select>
     </div>
     <br>
@@ -99,9 +99,9 @@
     <div class="form-group">
         <label for="osb">ОСБ</label>
         <select class="form-control" id="osb">
-            <option>8 мм</option>
-            <option>10 мм</option>
-            <option>12 мм</option>
+            <option>8</option>
+            <option>10</option>
+            <option>12</option>
         </select>
     </div>
     <div class="form-group">
@@ -135,9 +135,9 @@
         <div class="form-group">
             <label for="innerOsb">ОСБ</label>
             <select class="form-control" id="innerOsb">
-                <option>8 мм</option>
-                <option>10 мм</option>
-                <option>12 мм</option>
+                <option>8</option>
+                <option>10</option>
+                <option>12</option>
             </select>
         </div>
     </div>
@@ -207,9 +207,9 @@
         <div class="form-group">
             <label for="floorOsb">ОСБ</label>
             <select class="form-control" id="floorOsb">
-                <option>8 мм</option>
-                <option>10 мм</option>
-                <option>12 мм</option>
+                <option>8</option>
+                <option>10</option>
+                <option>12</option>
             </select>
         </div>
         <div class="form-group">

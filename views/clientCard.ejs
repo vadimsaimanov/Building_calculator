@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="../javascripts/scriptsClient.js" ></script>
+    <script src="../javascripts/scripts.js" ></script>
     <title>Карточка клиента</title>
 </head>
 <body onload="onLoadClientCard()">
@@ -41,6 +42,22 @@
 
 <!-- Тело страницы с блоками расчетов -->
 <div class="client-grid">
+    <% if (calculations.length > 0) { %>
+        <% calculations.forEach(calculation => { %>
+            <div class="calculation" onclick="openCalculationPage(<%= calculation.customer_id %>, <%= calculation.id %>)">
+                <div class="calculation-number">Расчёт № <%= calculation.number %></div>
+                <div class="calculation-date"><%= calculation.created_date %></div>
+                <div class="calculation-status"><%= calculation.status %></div>
+                <div class="calculation-address"><%= calculation.address_object_constractions %></div>
+                <div class="calculation-actions">
+                    <i class="bi bi-copy"></i>
+                    <i class="bi bi-trash"></i>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>Нет расчётов для отображения</p>
+    <% } %>
     <div class="calculation" onclick="openCalculationPage(1)">
         <div class="calculation-number">Расчет №1</div>
         <div class="calculation-date">02.02.2021</div>

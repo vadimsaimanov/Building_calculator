@@ -37,9 +37,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-function openCalculationPage(calculationId) {
+function openCalculationPage(clientId, calculationId) {
     // Здесь вы можете добавить код для открытия новой страницы с расчетом
     console.log("Открыть страницу расчета:", calculationId);
+    window.location.href = clientId+"/"+calculationId+"/carcas";
 }
 
 
