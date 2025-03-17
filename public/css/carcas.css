@@ -92,12 +92,13 @@ h1 {
 .address-input-container {
     display: flex;
     align-items: center;
+    justify-content: center; /* Центрируем по горизонтали */
     padding: 20px;
     gap: 10px;
 }
 
 .address-input-container .form-control {
-    flex: 1;
+    width: 300px; /* Уменьшаем ширину полей ввода */
     padding: 5px;
     font-size: 14px;
 }
@@ -138,17 +139,29 @@ h1 {
 /* Стили для формы */
 .form-group {
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Отступ между названием колонки и инпут полем */
 }
 
 /* Стили для полей ввода и селекторов */
 .form-control {
-    width: calc(100% - 80px); /* Уменьшаем ширину полей ввода и селекторов */
+    width: 150px; /* Фиксированная ширина полей ввода и селекторов */
+    min-width: 100px; /* Минимальная ширина */
+    max-width: 300px; /* Максимальная ширина */
     display: inline-block;
+    box-sizing: border-box;
+}
+
+/* Стили для единиц измерения */
+.unit {
+    font-size: 14px;
 }
 
 /* Стили для иконок */
 .add-calculation i {
     margin-right: 10px;
+    cursor: pointer;
 }
 
 /* Стили для подзаголовков */
@@ -159,6 +172,38 @@ h1 {
 
 /* Стили для кнопки */
 .btn-primary {
-    margin-top: 20px;
+    margin-top: 10px; /* Уменьшаем отступ сверху */
 }
 
+/* Стили для скрытых элементов */
+.hidden {
+    display: none;
+}
+
+/* Стили для заголовков этажей */
+.floor-data h5 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Стили для заголовков оконных проёмов */
+.subsection h5 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Стили для кнопок добавления */
+.btn-secondary {
+    margin-top: 10px;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
