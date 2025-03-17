@@ -104,6 +104,29 @@ async function OnClickSaveClient() {
 }
 
 // Функция для перехода на страницу каркаса
-function openCarcasPage(clientId) {
-    window.location.href = `/client/${clientId}/carcas`;
+async function openCarcasPage(clientId) {
+    try {
+        const response = await fetch(`${clientId}/calculation/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ clientId })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            console.log('Расчет успешно добавлен:', data);
+
+            // Правильный доступ к insertId
+            const calculationId = data.result.insertId;
+
+            window.location.href = `/client/${clientId}/${calculationId}/carcas`;
+        } else {
+            console.log('Невозможно добавить клиента:', data.message);
+        }
+    } catch (error) {
+        console.error('Ошибка сети:', error);
+    }
 }
