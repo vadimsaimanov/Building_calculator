@@ -43,8 +43,6 @@ function openCalculationPage(clientId, calculationId) {
     window.location.href = clientId+"/"+calculationId+"/carcas";
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function() {
     const clientInfo = document.querySelector(".client-info");
     const createClientModal = new bootstrap.Modal(document.getElementById("createClientModal"));

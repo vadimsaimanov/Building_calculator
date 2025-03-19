@@ -197,6 +197,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (address) {
             localStorage.setItem('savedAddress', address);
             alert('Адрес сохранен!');
+            // Обновляем страницу, чтобы отобразить новый адрес
+            window.location.reload();
         } else {
             alert('Введите адрес перед сохранением.');
         }
@@ -284,6 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem('calculationData', JSON.stringify(calculationData));
 
         alert('Данные сохранены и отправлены на расчет!');
+        window.location.href = `/client/${window.location.pathname.split('/')[2]}/calculation`;
     }
 
     // Назначение обработчиков событий
@@ -308,4 +311,38 @@ document.addEventListener("DOMContentLoaded", function () {
     // Назначение обработчиков для кнопок "Сохранить" и "Очистить расчет"
     document.getElementById('saveAddressButton').addEventListener('click', saveAddress);
     document.getElementById('clearCalculationButton').addEventListener('click', clearCalculation);
+
+    // Назначение обработчика для кнопки "Рассчитать"
+    document.getElementById('calculateButton').addEventListener('click', calculateAndSave);
 });
+
+// Функция для возврата на предыдущую страницу
+function goBack() {
+    if (window.location.pathname.includes('/client/') || window.location.pathname.includes('/carcas')) {
+        // Если пользователь на странице каркаса, возвращаем его на страницу карточки клиента
+        const clientId = window.location.pathname.split('/')[2]; // Извлекаем clientId из URL
+        window.location.href = `/client/${clientId}`;
+    } else if (window.location.pathname === '/client') {
+        localStorage.removeItem('user');
+        window.location.href = '/login';
+    } else {
+        window.history.back();
+    }
+}
+
+// Функция для загрузки данных пользователя при открытии страницы каркаса
+function onLoadCarcas() {
+    const name = document.getElementById('name');
+    const status = document.getElementById('user-status');
+
+    const localUser = localStorage.getItem('user');
+    if (!localUser) {
+        // Если данных нет, перенаправляем пользователя на страницу входа
+        window.location.href = '/login';
+    } else {
+        const user = JSON.parse(localUser);
+
+        name.innerHTML = `${user.first_name} ${user.last_name}`;
+        status.innerText = user.status;
+    }
+}

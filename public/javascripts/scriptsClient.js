@@ -7,18 +7,17 @@ async function OnClickSaveClient() {
     const address = document.getElementById('address').value;
 
     const managerId = 1; // ID менеджера, который добавляет клиента
-                                 // Получите ID менеджера из какого-либо источника, например, из sessionStorage или localStorage
 
     try {
         const response = await fetch('/client/add', {
-            method: 'POST',  // Используем POST для передачи данных безопасно
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({lastName, firstName, middleName, phone, email, address, managerId})  // Передаем данные в формате JSON
+            body: JSON.stringify({lastName, firstName, middleName, phone, email, address, managerId})
         });
 
-        const data = await response.json();  // Получаем ответ от сервера в формате JSON
+        const data = await response.json();
 
         if (data.success) {
             console.log('Клиент успешно добавлен:', data.user);
@@ -30,15 +29,6 @@ async function OnClickSaveClient() {
     }
 }
 
-// Функция для возврата на предыдущую страницу
-// function goBack() {
-//     if (window.location.pathname === '/client/') {
-//         localStorage.removeItem('user');
-//         window.location.href = '/login/';
-//     } else {
-//         window.history.back();
-//     }
-// }
 function goBack() {
     if (window.location.pathname.includes('/client/') || window.location.pathname.includes('/carcas')) {
         // Если пользователь на странице каркаса, возвращаем его на страницу карточки клиента
@@ -51,6 +41,7 @@ function goBack() {
         window.history.back();
     }
 }
+
 // Функция для перехода на страницу карточки клиента
 function openClientCard(clientId) {
     window.location.href = `/client/${clientId}`;
@@ -95,34 +86,6 @@ async function OnClickSaveClient() {
         if (data.success) {
             console.log('Клиент успешно добавлен:', data.client);
             window.location.reload(); // Обновляем страницу
-        } else {
-            console.log('Невозможно добавить клиента:', data.message);
-        }
-    } catch (error) {
-        console.error('Ошибка сети:', error);
-    }
-}
-
-// Функция для перехода на страницу каркаса
-async function openCarcasPage(clientId) {
-    try {
-        const response = await fetch(`${clientId}/calculation/add`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ clientId })
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-            console.log('Расчет успешно добавлен:', data);
-
-            // Правильный доступ к insertId
-            const calculationId = data.result.insertId;
-
-            window.location.href = `/client/${clientId}/${calculationId}/carcas`;
         } else {
             console.log('Невозможно добавить клиента:', data.message);
         }
