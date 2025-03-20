@@ -192,13 +192,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Функция для сохранения адреса
-    function saveAddress() {
+    async function saveAddress() {
         const address = document.getElementById('addressInput').value;
         if (address) {
-            localStorage.setItem('savedAddress', address);
-            alert('Адрес сохранен!');
-            // Обновляем страницу, чтобы отобразить новый адрес
-            window.location.reload();
+            //localStorage.setItem('savedAddress', address);
+            try {
+                const response = await fetch('updateAddress', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({address})
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+
+                    alert('Адрес сохранен!');
+                    window.location.reload(); // Обновляем страницу
+                } else {
+                    console.log('Невозможно добавить клиента:', data.message);
+                }
+            } catch (error) {
+                console.error('Ошибка сети:', error);
+            }
+
+
         } else {
             alert('Введите адрес перед сохранением.');
         }

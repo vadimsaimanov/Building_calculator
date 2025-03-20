@@ -43,7 +43,7 @@
 <div class="client-grid">
     <% if (calculations.length > 0) { %>
         <% calculations.forEach(calculation => { %>
-            <div class="calculation" onclick="openCalculationPage(<%= calculation.customer_id %>, <%= calculation.id %>)">
+            <div class="calculation" onclick="openCalculationPage(<%= calculation.customer_id %>, <%= calculation.calculation_id %>)">
                 <div class="calculation-number">Расчёт № <%= calculation.number %></div>
                 <div class="calculation-date"><%= calculation.created_date %></div>
                 <div class="calculation-status"><%= calculation.status %></div>
