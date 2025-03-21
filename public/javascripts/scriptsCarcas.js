@@ -256,58 +256,58 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Функция для сохранения данных при нажатии на "Рассчитать"
-    function calculateAndSave() {
-        const floorsData = [];
-        document.querySelectorAll('.floor-data').forEach(floor => {
-            const floorHeight = floor.querySelector('input[id^="floorHeight-"]').value;
-            const wallPerimeter = floor.querySelector('input[id^="wallPerimeter-"]').value;
-            const baseArea = floor.querySelector('input[id^="baseArea-"]').value;
-            const wallThickness = floor.querySelector('select[id^="wallThickness-"]').value;
-            const innerWallLength = floor.querySelector('input[id^="innerWallLength-"]').value;
-            const innerWallThickness = floor.querySelector('select[id^="innerWallThickness-"]').value;
-
-            floorsData.push({
-                floorHeight,
-                wallPerimeter,
-                baseArea,
-                wallThickness,
-                innerWallLength,
-                innerWallThickness
-            });
-        });
-
-        const OSBExternalWall = document.getElementById('osb').value;
-        const steamWaterProofingExternalWall = document.getElementById('vaporBarrier').value;
-        const windscreenExternalWall = document.getElementById('windProtection').value;
-        const insulationExternalWall = document.getElementById('insulation').value;
-
-        const OSBInternalWall = document.getElementById('innerOsb').value;
-
-        const overlapThickness = document.getElementById('floorThickness').value;
-        const OSBThickness = document.getElementById('floorOsb').value;
-        const steamWaterProofingThickness = document.getElementById('floorVaporBarrier').value;
-        const windscreenThickness = document.getElementById('floorWindProtection').value;
-        const insulationThickness = document.getElementById('floorInsulation').value;
-
-        // Сохранение данных в localStorage
-        const calculationData = {
-            floorsData,
-            OSBExternalWall,
-            steamWaterProofingExternalWall,
-            windscreenExternalWall,
-            insulationExternalWall,
-            OSBInternalWall,
-            overlapThickness,
-            OSBThickness,
-            steamWaterProofingThickness,
-            windscreenThickness,
-            insulationThickness
-        };
-        localStorage.setItem('calculationData', JSON.stringify(calculationData));
-
-        alert('Данные сохранены и отправлены на расчет!');
-        window.location.href = `/client/${window.location.pathname.split('/')[2]}/calculation`;
-    }
+    // function calculateAndSave() {
+    //     const floorsData = [];
+    //     document.querySelectorAll('.floor-data').forEach(floor => {
+    //         const floorHeight = floor.querySelector('input[id^="floorHeight-"]').value;
+    //         const wallPerimeter = floor.querySelector('input[id^="wallPerimeter-"]').value;
+    //         const baseArea = floor.querySelector('input[id^="baseArea-"]').value;
+    //         const wallThickness = floor.querySelector('select[id^="wallThickness-"]').value;
+    //         const innerWallLength = floor.querySelector('input[id^="innerWallLength-"]').value;
+    //         const innerWallThickness = floor.querySelector('select[id^="innerWallThickness-"]').value;
+    //
+    //         floorsData.push({
+    //             floorHeight,
+    //             wallPerimeter,
+    //             baseArea,
+    //             wallThickness,
+    //             innerWallLength,
+    //             innerWallThickness
+    //         });
+    //     });
+    //
+    //     const OSBExternalWall = document.getElementById('osb').value;
+    //     const steamWaterProofingExternalWall = document.getElementById('vaporBarrier').value;
+    //     const windscreenExternalWall = document.getElementById('windProtection').value;
+    //     const insulationExternalWall = document.getElementById('insulation').value;
+    //
+    //     const OSBInternalWall = document.getElementById('innerOsb').value;
+    //
+    //     const overlapThickness = document.getElementById('floorThickness').value;
+    //     const OSBThickness = document.getElementById('floorOsb').value;
+    //     const steamWaterProofingThickness = document.getElementById('floorVaporBarrier').value;
+    //     const windscreenThickness = document.getElementById('floorWindProtection').value;
+    //     const insulationThickness = document.getElementById('floorInsulation').value;
+    //
+    //     // Сохранение данных в localStorage
+    //     const calculationData = {
+    //         floorsData,
+    //         OSBExternalWall,
+    //         steamWaterProofingExternalWall,
+    //         windscreenExternalWall,
+    //         insulationExternalWall,
+    //         OSBInternalWall,
+    //         overlapThickness,
+    //         OSBThickness,
+    //         steamWaterProofingThickness,
+    //         windscreenThickness,
+    //         insulationThickness
+    //     };
+    //     localStorage.setItem('calculationData', JSON.stringify(calculationData));
+    //
+    //     alert('Данные сохранены и отправлены на расчет!');
+    //     window.location.href = `/client/${window.location.pathname.split('/')[2]}/calculation`;
+    // }
 
     // Назначение обработчиков событий
     document.querySelectorAll('.toggle-icon').forEach(icon => {
@@ -365,4 +365,85 @@ function onLoadCarcas() {
         name.innerHTML = `${user.first_name} ${user.last_name}`;
         status.innerText = user.status;
     }
+}
+
+function collectFormData() {
+    const floors = [];
+    const floorCount = parseInt(document.getElementById('floorCount').value);
+
+    for (let i = 0; i < floorCount; i++) {
+        floors.push({
+            floorNumber: i + 1,
+            height: parseFloat(document.getElementById(`floorHeight-${i}`).value),
+            perimeter: parseFloat(document.getElementById(`wallPerimeter-${i}`).value),
+            baseArea: parseFloat(document.getElementById(`baseArea-${i}`).value),
+            wallThickness: parseInt(document.getElementById(`wallThickness-${i}`).value),
+            innerWallLength: parseFloat(document.getElementById(`innerWallLength-${i}`).value),
+            innerWallThickness: parseInt(document.getElementById(`innerWallThickness-${i}`).value)
+        });
+    }
+
+    const windows = Array.from(document.querySelectorAll('#windowsContainer .window-group')).map(group => ({
+        height: parseFloat(group.querySelector('input[placeholder="Введите высоту"]').value),
+        width: parseFloat(group.querySelector('input[placeholder="Введите ширину"]').value),
+        count: parseInt(group.querySelector('input[placeholder="Введите количество"]').value)
+    }));
+
+    const externalDoors = Array.from(document.querySelectorAll('#externalDoorsContainer .door-group')).map(group => ({
+        height: parseFloat(group.querySelector('input[placeholder="Введите высоту"]').value),
+        width: parseFloat(group.querySelector('input[placeholder="Введите ширину"]').value),
+        count: parseInt(group.querySelector('input[placeholder="Введите количество"]').value)
+    }));
+
+    const internalDoors = Array.from(document.querySelectorAll('#internalDoorsContainer .door-group')).map(group => ({
+        height: parseFloat(group.querySelector('input[placeholder="Введите высоту"]').value),
+        width: parseFloat(group.querySelector('input[placeholder="Введите ширину"]').value),
+        count: parseInt(group.querySelector('input[placeholder="Введите количество"]').value)
+    }));
+
+    const data = {
+        address: document.getElementById('addressInput').value,
+        floors: floors,
+        externalWallSheathing: {
+            osb: document.getElementById('osb').value,
+            vaporBarrier: document.getElementById('vaporBarrier').value,
+            windProtection: document.getElementById('windProtection').value,
+            insulation: document.getElementById('insulation').value
+        },
+        innerWallSheathing: {
+            osb: document.getElementById('innerOsb').value
+        },
+        windows: windows,
+        externalDoors: externalDoors,
+        internalDoors: internalDoors,
+        overlaps: {
+            floorThickness: parseInt(document.getElementById('floorThickness').value),
+            osb: document.getElementById('floorOsb').value,
+            vaporBarrier: document.getElementById('floorVaporBarrier').value,
+            windProtection: document.getElementById('floorWindProtection').value,
+            insulation: document.getElementById('floorInsulation').value
+        }
+    };
+
+    return data;
+}
+
+function calculateAndSave() {
+    const data = collectFormData();
+
+    fetch('saveCarcasData', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(result => {
+            alert('Данные успешно отправлены!');
+        })
+        .catch(error => {
+            console.error('Ошибка отправки данных:', error);
+            alert('Произошла ошибка при отправке данных');
+        });
 }
