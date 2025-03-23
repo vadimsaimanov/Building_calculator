@@ -39,8 +39,8 @@
 <!-- Поле для ввода адреса и кнопки -->
 <div class="address-input-container">
     <input type="text" class="form-control" id="addressInput" placeholder="Добавить адрес объекта строительства">
-    <button type="button" class="btn btn-success" id="saveAddressButton">Сохранить</button>
-    <button type="button" class="btn btn-danger" id="clearCalculationButton">Очистить расчет</button>
+    <button type="button" class="btn btn-success" id="saveAddressButton" onclick="saveAddress()">Сохранить</button>
+    <button type="button" class="btn btn-danger" id="clearCalculationButton" onclick="clearCalculation()">Очистить расчет</button>
 </div>
 
 <!-- Контейнер для исходных данных -->
@@ -49,7 +49,7 @@
     <div class="spacer"></div>
     <div class="form-group">
         <label for="floorCount">Количество этажей</label>
-        <select class="form-control" id="floorCount">
+        <select class="form-control" id="floorCount" onchange="onFloorCountChange(event.target.value)">
             <option>1</option>
             <option>2</option>
         </select>
@@ -99,207 +99,11 @@
                 </select>
                 <span class="unit">мм</span>
             </div>
+
         </div>
     </div>
     <br>
 
-    <!-- Заголовок Обшивки внешних стен -->
-    <div class="spacer"></div>
-    <h4>Обшивки внешних стен</h4>
-    <div class="form-group">
-        <label for="osb">ОСБ</label>
-        <select class="form-control" id="osb">
-            <option>9 мм</option>
-            <option>10 мм</option>
-            <option>15 мм</option>
-            <option>18 мм</option>
-        </select>
-        <span class="unit">мм</span>
-    </div>
-    <div class="form-group">
-        <label for="vaporBarrier">Парогидроизоляция</label>
-        <select class="form-control" id="vaporBarrier">
-            <option>Ондутис</option>
-            <option>Пароизоляция Axton (b)</option>
-            <option>Пароизоляционная пленка Ютафол Н 96 Сильвер</option>
-            <option>Пароизоляция В</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="windProtection">Ветрозащита</label>
-        <select class="form-control" id="windProtection">
-            <option>Ветро-влагозащитная мембрана Brane А</option>
-            <option>Паропроницаемая ветро-влагозащита A Optima</option>
-            <option>Гидро-ветрозащита Тип А</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="insulation">Утеплитель</label>
-        <select class="form-control" id="insulation">
-            <option>Кнауф ТеплоКнауф 100 мм</option>
-            <option>Технониколь 100 мм</option>
-            <option>Эковер 100 мм</option>
-            <option>Эковер 150 мм</option>
-            <option>Эковер 200 мм</option>
-            <option>Фасад 200 мм</option>
-            <option>Эковер 250 мм</option>
-        </select>
-    </div>
-    <br>
-
-    <!-- Добавить расчет обшивки внутренних стен -->
-    <div class="add-calculation">
-        <i class="bi bi-plus-circle toggle-icon" onclick="toggleSection('innerWalls')"></i>
-        <span class="toggle-text">Добавить расчет обшивки внутренних стен</span>
-        <div id="innerWalls" class="hidden">
-            <div class="form-group">
-                <label for="innerOsb">ОСБ</label>
-                <select class="form-control" id="innerOsb">
-                    <option>9 мм</option>
-                    <option>10 мм</option>
-                    <option>15 мм</option>
-                    <option>18 мм</option>
-                </select>
-                <span class="unit">мм</span>
-            </div>
-        </div>
-    </div>
-
-    <br>
-    <!-- Учесть двери и окна -->
-    <div class="spacer"></div>
-    <div class="add-calculation">
-        <i class="bi bi-plus-circle toggle-icon" onclick="toggleSection('windowsDoors')"></i>
-        <span class="toggle-text">Учесть двери и окна</span>
-        <div id="windowsDoors" class="hidden">
-            <div class="subsection">
-                <h5>Оконные проемы</h5>
-                <div id="windowsContainer">
-                    <div class="window-group">
-                        <div class="form-group">
-                            <label for="windowHeight">Высота</label>
-                            <input type="text" class="form-control" value="1.5" placeholder="Введите высоту">
-                            <span class="unit">м</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="windowWidth">Ширина</label>
-                            <input type="text" class="form-control" value="1.5" placeholder="Введите ширину">
-                            <span class="unit">м</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="windowCount">Количество</label>
-                            <input type="text" class="form-control" value="5" placeholder="Введите количество">
-                            <span class="unit">шт</span>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-secondary" id="addWindowButton">+ Добавить окно</button>
-            </div>
-            <div class="subsection">
-                <h5>Дверные проемы внешние</h5>
-                <div id="externalDoorsContainer">
-                    <div class="door-group">
-                        <div class="form-group">
-                            <label for="doorHeight">Высота</label>
-                            <input type="text" class="form-control" value="2.1" placeholder="Введите высоту">
-                            <span class="unit">м</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="doorWidth">Ширина</label>
-                            <input type="text" class="form-control" value="1" placeholder="Введите ширину">
-                            <span class="unit">м</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="doorCount">Количество</label>
-                            <input type="text" class="form-control" value="1" placeholder="Введите количество">
-                            <span class="unit">шт</span>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-secondary" id="addExternalDoorButton">+ Добавить дверь</button>
-            </div>
-            <div class="subsection">
-                <h5>Дверные проемы внутренние</h5>
-                <div id="internalDoorsContainer">
-                    <div class="door-group">
-                        <div class="form-group">
-                            <label for="innerDoorHeight">Высота</label>
-                            <input type="text" class="form-control" value="2" placeholder="Введите высоту">
-                            <span class="unit">м</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="innerDoorWidth">Ширина</label>
-                            <input type="text" class="form-control" value="0.8" placeholder="Введите ширину">
-                            <span class="unit">м</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="innerDoorCount">Количество</label>
-                            <input type="text" class="form-control" value="5" placeholder="Введите количество">
-                            <span class="unit">шт</span>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-secondary" id="addInternalDoorButton">+ Добавить дверь</button>
-            </div>
-        </div>
-    </div>
-    <br>
-
-    <!-- Добавить расчет перекрытий -->
-    <div class="add-calculation">
-        <i class="bi bi-plus-circle toggle-icon" onclick="toggleSection('overlaps')"></i>
-        <span class="toggle-text">Добавить расчет перекрытий</span>
-        <div id="overlaps" class="hidden">
-            <div class="form-group">
-                <label for="floorThickness">Толщина перекрытия</label>
-                <select class="form-control" id="floorThickness">
-                    <option>200</option>
-                    <option>250</option>
-                </select>
-                <span class="unit">мм</span>
-            </div>
-            <div class="form-group">
-                <label for="floorOsb">ОСБ</label>
-                <select class="form-control" id="floorOsb">
-                    <option>9 мм</option>
-                    <option>10 мм</option>
-                    <option>15 мм</option>
-                    <option>18 мм</option>
-                </select>
-                <span class="unit">мм</span>
-            </div>
-            <div class="form-group">
-                <label for="floorVaporBarrier">Парогидроизоляция</label>
-                <select class="form-control" id="floorVaporBarrier">
-                    <option>Ондутис</option>
-                    <option>Пароизоляция Axton (b)</option>
-                    <option>Пароизоляционная пленка Ютафол Н 96 Сильвер</option>
-                    <option>Пароизоляция В</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="floorWindProtection">Ветрозащита</label>
-                <select class="form-control" id="floorWindProtection">
-                    <option>Ветро-влагозащитная мембрана Brane А</option>
-                    <option>Паропроницаемая ветро-влагозащита A Optima</option>
-                    <option>Гидро-ветрозащита Тип А</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="floorInsulation">Утеплитель</label>
-                <select class="form-control" id="floorInsulation">
-                    <option>Кнауф ТеплоКнауф 100 мм</option>
-                    <option>Технониколь 100 мм</option>
-                    <option>Эковер 100 мм</option>
-                    <option>Эковер 150 мм</option>
-                    <option>Эковер 200 мм</option>
-                    <option>Фасад 200 мм</option>
-                    <option>Эковер 250 мм</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <br>
 
     <!-- Кнопка Рассчитать -->
     <button type="button" class="btn btn-primary" onclick="calculateAndSave()">Рассчитать</button>
