@@ -522,8 +522,10 @@ function collectFormData() {
         floors.push(floorData);
     }
 
-
-    return floors;
+    return {
+        address: document.getElementById('addressInput').value,
+        floors: floors
+    };
 }
 
 
