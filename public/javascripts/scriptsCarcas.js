@@ -77,9 +77,25 @@ function updateFloorHeader(count) {
     floorHeader.innerText = `${count} этаж${getFloorSuffix(count)}`;
 }
 function onFloorCountChange(value) {
-    const selectedFloorCount = parseInt(value);
-    updateFloorHeader(selectedFloorCount);
-    updateFloors(selectedFloorCount);
+    const section = document.getElementById('calculation-div');
+    if (!isNaN(value)) {
+        const selectedFloorCount = parseInt(value);
+        updateFloorHeader(selectedFloorCount);
+        updateFloors(selectedFloorCount);
+
+        if (section.classList.contains('hidden')) {
+            section.classList.remove('hidden');
+        }
+
+    } else {
+        if (!section.classList.contains('hidden')) {
+            section.classList.add('hidden');
+        }
+        updateFloors(0);
+        const floorHeader = document.getElementById('floorHeader');
+        floorHeader.innerText = ``;
+    }
+
 }
 
 // Функция для раскрытия/скрытия блоков
@@ -146,46 +162,51 @@ function updateFloors(count) {
             <span class="unit">мм</span>
         </div>
 
-        <div class="spacer"></div>
-        <h4>Обшивки внешних стен</h4>
-        <div class="form-group">
-            <label for="osb-${i}">ОСБ</label>
-            <select class="form-control" id="osb-${i}">
-                <option>9 мм</option>
-                <option>10 мм</option>
-                <option>15 мм</option>
-                <option>18 мм</option>
-            </select>
-            <span class="unit">мм</span>
-        </div>
-        <div class="form-group">
-            <label for="vaporBarrier-${i}">Парогидроизоляция</label>
-            <select class="form-control" id="vaporBarrier-${i}">
-                <option>Ондутис</option>
-                <option>Пароизоляция Axton (b)</option>
-                <option>Пароизоляционная пленка Ютафол Н 96 Сильвер</option>
-                <option>Пароизоляция В</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="windProtection-${i}">Ветрозащита</label>
-            <select class="form-control" id="windProtection-${i}">
-                <option>Ветро-влагозащитная мембрана Brane А</option>
-                <option>Паропроницаемая ветро-влагозащита A Optima</option>
-                <option>Гидро-ветрозащита Тип А</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="insulation-${i}">Утеплитель</label>
-            <select class="form-control" id="insulation-${i}">
-                <option>Кнауф ТеплоКнауф 100 мм</option>
-                <option>Технониколь 100 мм</option>
-                <option>Эковер 100 мм</option>
-                <option>Эковер 150 мм</option>
-                <option>Эковер 200 мм</option>
-                <option>Фасад 200 мм</option>
-                <option>Эковер 250 мм</option>
-            </select>
+
+        <div class="add-calculation">
+            <i class="bi bi-plus-circle toggle-icon" onclick="toggleSection('outerWallsCover-${i}')"></i>
+            <span class="toggle-text">Учесть обшивку внешних стен</span>
+            <div id="outerWallsCover-${i}" class="hidden">
+                <div class="form-group">
+                    <label for="osb-${i}">ОСБ</label>
+                    <select class="form-control" id="osb-${i}">
+                        <option>9 мм</option>
+                        <option>10 мм</option>
+                        <option>15 мм</option>
+                        <option>18 мм</option>
+                    </select>
+                    <span class="unit">мм</span>
+                </div>
+                <div class="form-group">
+                    <label for="vaporBarrier-${i}">Парогидроизоляция</label>
+                    <select class="form-control" id="vaporBarrier-${i}">
+                        <option>Ондутис</option>
+                        <option>Пароизоляция Axton (b)</option>
+                        <option>Пароизоляционная пленка Ютафол Н 96 Сильвер</option>
+                        <option>Пароизоляция В</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="windProtection-${i}">Ветрозащита</label>
+                    <select class="form-control" id="windProtection-${i}">
+                        <option>Ветро-влагозащитная мембрана Brane А</option>
+                        <option>Паропроницаемая ветро-влагозащита A Optima</option>
+                        <option>Гидро-ветрозащита Тип А</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="insulation-${i}">Утеплитель</label>
+                    <select class="form-control" id="insulation-${i}">
+                        <option>Кнауф ТеплоКнауф 100 мм</option>
+                        <option>Технониколь 100 мм</option>
+                        <option>Эковер 100 мм</option>
+                        <option>Эковер 150 мм</option>
+                        <option>Эковер 200 мм</option>
+                        <option>Фасад 200 мм</option>
+                        <option>Эковер 250 мм</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <br>
 
@@ -286,6 +307,13 @@ function updateFloors(count) {
         </div>
         <br>
     `;
+        // const btnCalculate = document.createElement('button');
+        // btnCalculate.classList.add('btn', 'btn-primary');
+        // btnCalculate.type = 'button';
+        // btnCalculate.textContent = 'Рассчитать';
+        // btnCalculate.onclick = calculateAndSave();
+        // floorsContainer.appendChild(btnCalculate);
+        //
         floorsContainer.appendChild(floorData);
     }
 
@@ -389,31 +417,31 @@ async function saveAddress() {
 
 // Функция для сброса данных до дефолтных
 function clearCalculation() {
-    // Сброс адреса
-    document.getElementById('addressInput').value = '';
-    localStorage.removeItem('savedAddress');
-
-    // Сброс количества этажей
-    const floorCountSelect = document.getElementById('floorCount');
-    floorCountSelect.value = 1;
-    updateFloors(1);
-
-    // Сброс остальных полей
-    document.getElementById('osb').value = '9 мм';
-    document.getElementById('vaporBarrier').value = 'Ондутис';
-    document.getElementById('windProtection').value = 'Ветро-влагозащитная мембрана Brane А';
-    document.getElementById('insulation').value = 'Кнауф ТеплоКнауф 100 мм';
-    document.getElementById('innerOsb').value = '9 мм';
-    document.getElementById('floorThickness').value = '200';
-    document.getElementById('floorOsb').value = '9 мм';
-    document.getElementById('floorVaporBarrier').value = 'Ондутис';
-    document.getElementById('floorWindProtection').value = 'Ветро-влагозащитная мембрана Brane А';
-    document.getElementById('floorInsulation').value = 'Кнауф ТеплоКнауф 100 мм';
-
-    // Очистка окон и дверей
-    document.getElementById('windowsContainer').innerHTML = '';
-    document.getElementById('externalDoorsContainer').innerHTML = '';
-    document.getElementById('internalDoorsContainer').innerHTML = '';
+    // // Сброс адреса
+    // document.getElementById('addressInput').value = '';
+    // localStorage.removeItem('savedAddress');
+    //
+    // // Сброс количества этажей
+    // const floorCountSelect = document.getElementById('floorCount');
+    // floorCountSelect.value = 1;
+    // updateFloors(1);
+    //
+    // // Сброс остальных полей
+    // document.getElementById('osb').value = '9 мм';
+    // document.getElementById('vaporBarrier').value = 'Ондутис';
+    // document.getElementById('windProtection').value = 'Ветро-влагозащитная мембрана Brane А';
+    // document.getElementById('insulation').value = 'Кнауф ТеплоКнауф 100 мм';
+    // document.getElementById('innerOsb').value = '9 мм';
+    // document.getElementById('floorThickness').value = '200';
+    // document.getElementById('floorOsb').value = '9 мм';
+    // document.getElementById('floorVaporBarrier').value = 'Ондутис';
+    // document.getElementById('floorWindProtection').value = 'Ветро-влагозащитная мембрана Brane А';
+    // document.getElementById('floorInsulation').value = 'Кнауф ТеплоКнауф 100 мм';
+    //
+    // // Очистка окон и дверей
+    // document.getElementById('windowsContainer').innerHTML = '';
+    // document.getElementById('externalDoorsContainer').innerHTML = '';
+    // document.getElementById('internalDoorsContainer').innerHTML = '';
 
     alert('Все данные сброшены до значений по умолчанию.');
 }
@@ -458,10 +486,13 @@ function onLoadCarcas(countFloor) {
         });
     });
 
-    if (countFloor === undefined) {
-        onFloorCountChange('1');
-    } else
-        onFloorCountChange(countFloor);
+
+    onFloorCountChange()
+    //
+    // if (countFloor === undefined) {
+    //     onFloorCountChange('1');
+    // } else
+    //     onFloorCountChange(countFloor);
 }
 
 function collectFormData() {

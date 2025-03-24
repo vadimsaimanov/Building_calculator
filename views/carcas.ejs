@@ -50,63 +50,67 @@
     <div class="form-group">
         <label for="floorCount">Количество этажей</label>
         <select class="form-control" id="floorCount" onchange="onFloorCountChange(event.target.value)">
+            <option>Выберете количество этажей</option>
             <option>1</option>
             <option>2</option>
         </select>
     </div>
     <br>
-    <h4 id="floorHeader">1 этаж</h4>
+    <h4 id="floorHeader"></h4>
     <div id="floors-container">
-        <div class="floor-data">
-            <h5>Этаж 1</h5>
-            <div class="form-group">
-                <label for="floorHeight-0">Высота этажа</label>
-                <input type="text" class="form-control" id="floorHeight-0" value="3" placeholder="Введите высоту">
-                <span class="unit">м</span>
-            </div>
-            <div class="form-group">
-                <label for="wallPerimeter-0">Периметр внешних стен</label>
-                <input type="text" class="form-control" id="wallPerimeter-0" value="30" placeholder="Введите периметр">
-                <span class="unit">м</span>
-            </div>
-            <div class="form-group">
-                <label for="baseArea-0">Площадь основания</label>
-                <input type="text" class="form-control" id="baseArea-0" value="56" placeholder="Введите площадь">
-                <span class="unit">м²</span>
-            </div>
-            <div class="form-group">
-                <label for="wallThickness-0">Толщина внешних стен</label>
-                <select class="form-control" id="wallThickness-0">
-                    <option>100</option>
-                    <option>150</option>
-                    <option>200</option>
-                    <option>250</option>
-                </select>
-                <span class="unit">мм</span>
-            </div>
-            <div class="form-group">
-                <label for="innerWallLength-0">Длина внутренних стен</label>
-                <input type="text" class="form-control" id="innerWallLength-0" value="15" placeholder="Введите длину">
-                <span class="unit">м</span>
-            </div>
-            <div class="form-group">
-                <label for="innerWallThickness-0">Толщина внутренних стен</label>
-                <select class="form-control" id="innerWallThickness-0">
-                    <option>100</option>
-                    <option>150</option>
-                    <option>200</option>
-                    <option>250</option>
-                </select>
-                <span class="unit">мм</span>
-            </div>
+<!--        <div class="floor-data">-->
+<!--            <h5>Этаж 1</h5>-->
+<!--            <div class="form-group">-->
+<!--                <label for="floorHeight-0">Высота этажа</label>-->
+<!--                <input type="text" class="form-control" id="floorHeight-0" value="3" placeholder="Введите высоту">-->
+<!--                <span class="unit">м</span>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="wallPerimeter-0">Периметр внешних стен</label>-->
+<!--                <input type="text" class="form-control" id="wallPerimeter-0" value="30" placeholder="Введите периметр">-->
+<!--                <span class="unit">м</span>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="baseArea-0">Площадь основания</label>-->
+<!--                <input type="text" class="form-control" id="baseArea-0" value="56" placeholder="Введите площадь">-->
+<!--                <span class="unit">м²</span>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="wallThickness-0">Толщина внешних стен</label>-->
+<!--                <select class="form-control" id="wallThickness-0">-->
+<!--                    <option>100</option>-->
+<!--                    <option>150</option>-->
+<!--                    <option>200</option>-->
+<!--                    <option>250</option>-->
+<!--                </select>-->
+<!--                <span class="unit">мм</span>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="innerWallLength-0">Длина внутренних стен</label>-->
+<!--                <input type="text" class="form-control" id="innerWallLength-0" value="15" placeholder="Введите длину">-->
+<!--                <span class="unit">м</span>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="innerWallThickness-0">Толщина внутренних стен</label>-->
+<!--                <select class="form-control" id="innerWallThickness-0">-->
+<!--                    <option>100</option>-->
+<!--                    <option>150</option>-->
+<!--                    <option>200</option>-->
+<!--                    <option>250</option>-->
+<!--                </select>-->
+<!--                <span class="unit">мм</span>-->
+<!--            </div>-->
 
-        </div>
+<!--        </div>-->
     </div>
     <br>
 
 
     <!-- Кнопка Рассчитать -->
-    <button type="button" class="btn btn-primary" onclick="calculateAndSave()">Рассчитать</button>
+    <div class="calculation-btn-div" id="calculation-div">
+        <button type="button" class="btn btn-primary" onclick="calculateAndSave()">Рассчитать</button>
+    </div>
+
 </div>
 </body>
 </html>
