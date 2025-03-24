@@ -19,8 +19,15 @@
 
 /* Стили для логотипа */
 #logo {
-    max-width: 12%; /* Размер логотипа */
+    max-width: 100px;
+    width: 100%;
     height: auto;
+}
+
+@media (max-width: 768px) {
+    #logo {
+        max-width: 10%;
+    }
 }
 
 /* Блок с информацией о клиенте */
