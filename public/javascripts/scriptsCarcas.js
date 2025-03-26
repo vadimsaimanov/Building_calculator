@@ -560,22 +560,37 @@ function collectFormData() {
 }
 
 
-function calculateAndSave() {
+async function calculateAndSave(clientId) {
     const data = collectFormData();
-
-    fetch('saveCarcasData', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => response.json())
-        .then(result => {
-            alert('Данные успешно отправлены!');
-        })
-        .catch(error => {
-            console.error('Ошибка отправки данных:', error);
-            alert('Произошла ошибка при отправке данных');
+    try {
+        const response = await fetch('saveCarcasData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         });
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            alert('Данные сохранены!');
+            window.location.href = `/client/${clientId}/${result.calculationId}/carcas/result`;
+        } else {
+            console.log('Невозможно добавить расчет:', result.message);
+        }
+    } catch (error) {
+        console.error('Ошибка сети:', error);
+    }
+
+
+    // .then(response => response.json())
+    // .then(result => {
+    //     alert('Данные успешно отправлены!');
+    // })
+    // .catch(error => {
+    //     console.error('Ошибка отправки данных:', error);
+    //     alert('Произошла ошибка при отправке данных');
+    // });
 }

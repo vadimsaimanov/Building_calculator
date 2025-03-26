@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return "ов";
         }
     }
+
 });
 
 function openCalculationPage(clientId, calculationId) {
