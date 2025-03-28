@@ -170,10 +170,10 @@ function updateFloors(count) {
                 <div class="form-group">
                     <label for="osb-${i}">ОСБ</label>
                     <select class="form-control" id="osb-${i}">
-                        <option>9 мм</option>
-                        <option>10 мм</option>
-                        <option>15 мм</option>
-                        <option>18 мм</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>18</option>
                     </select>
                     <span class="unit">мм</span>
                 </div>
@@ -217,10 +217,10 @@ function updateFloors(count) {
                 <div class="form-group">
                     <label for="innerOsb-${i}">ОСБ</label>
                     <select class="form-control" id="innerOsb-${i}">
-                        <option>9 мм</option>
-                        <option>10 мм</option>
-                        <option>15 мм</option>
-                        <option>18 мм</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>18</option>
                     </select>
                     <span class="unit">мм</span>
                 </div>
@@ -267,10 +267,10 @@ function updateFloors(count) {
                 <div class="form-group">
                     <label for="floorOsb-${i}">ОСБ</label>
                     <select class="form-control" id="floorOsb-${i}">
-                        <option>9 мм</option>
-                        <option>10 мм</option>
-                        <option>15 мм</option>
-                        <option>18 мм</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>18</option>
                     </select>
                     <span class="unit">мм</span>
                 </div>
@@ -459,7 +459,7 @@ function goBack() {
     }
 }
 // Функция для загрузки данных пользователя при открытии страницы каркаса
-function onLoadCarcas(countFloor) {
+function onLoadCarcas(floorData) {
     const name = document.getElementById('name');
     const status = document.getElementById('user-status');
 
@@ -486,13 +486,22 @@ function onLoadCarcas(countFloor) {
         });
     });
 
+    console.log(floorData)
+    if(floorData !== null) {
+        loadFloorsSavedToDB(floorData);
+    }
 
-    onFloorCountChange()
+    //onFloorCountChange()
     //
     // if (countFloor === undefined) {
     //     onFloorCountChange('1');
     // } else
     //     onFloorCountChange(countFloor);
+}
+
+async function loadFloorsSavedToDB(floorData) {
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    console.log(floorData)
 }
 
 function collectFormData() {

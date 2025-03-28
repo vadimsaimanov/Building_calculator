@@ -46,5 +46,5 @@ async function openCarcasPage(clientId) {
 // Функция для открытия страницы расчета
 function openCalculationPage(clientId, calculationId) {
     console.log("Открыть страницу расчета:", calculationId);
-    window.location.href = `/client/${clientId}/${calculationId}/carcas`;
+    window.location.href = `/client/${clientId}/${calculationId}/carcas/result`;
 }
