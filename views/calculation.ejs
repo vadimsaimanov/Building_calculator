@@ -101,12 +101,13 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colspan="5" class="text-right">Итого стоимость материалов: <%= groupedResults[floor].total %></td>
+                    <td colspan="5" class="text-right">Итого стоимость материалов для этажа: <%= Number((groupedResults[floor].total).toFixed(2)) %></td>
                 </tr>
                 </tfoot>
             </table>
         </div>
     <% }); %>
+    <p class="text-right">Итого стоимость материалов: <%= Number((totalCost).toFixed(2)) %></p>
 </div>
 
 <div class="modal fade" id="createClientModal" tabindex="-1" aria-labelledby="createClientModalLabel" aria-hidden="true">
