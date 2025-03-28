@@ -138,7 +138,7 @@ function updateFloors(count) {
         </div>
         <div class="form-group">
             <label for="wallThickness-${i}">Толщина внешних стен</label>
-            <select class="form-control" id="wallThickness-${i}">
+            <select class="form-control" id="wallThickness-${i}" onchange="updateInsulationOptions(${i})">
                 <option>100</option>
                 <option>150</option>
                 <option>200</option>
@@ -153,7 +153,7 @@ function updateFloors(count) {
         </div>
         <div class="form-group">
             <label for="innerWallThickness-${i}">Толщина внутренних стен</label>
-            <select class="form-control" id="innerWallThickness-${i}">
+            <select class="form-control" id="innerWallThickness-${i}" onchange="updateInsulationOptions(${i})">
                 <option>100</option>
                 <option>150</option>
                 <option>200</option>
@@ -258,7 +258,7 @@ function updateFloors(count) {
             <div id="overlaps-${i}" class="hidden">
                 <div class="form-group">
                     <label for="floorThickness-${i}">Толщина перекрытия</label>
-                    <select class="form-control" id="floorThickness-${i}">
+                    <select class="form-control" id="floorThickness-${i}" onchange="updateInsulationOptions(${i})">
                         <option>200</option>
                         <option>250</option>
                     </select>
@@ -294,10 +294,6 @@ function updateFloors(count) {
                 <div class="form-group">
                     <label for="floorInsulation-${i}">Утеплитель</label>
                     <select class="form-control" id="floorInsulation-${i}">
-                        <option>Кнауф ТеплоКнауф 100 мм</option>
-                        <option>Технониколь 100 мм</option>
-                        <option>Эковер 100 мм</option>
-                        <option>Эковер 150 мм</option>
                         <option>Эковер 200 мм</option>
                         <option>Фасад 200 мм</option>
                         <option>Эковер 250 мм</option>
@@ -307,16 +303,39 @@ function updateFloors(count) {
         </div>
         <br>
     `;
-        // const btnCalculate = document.createElement('button');
-        // btnCalculate.classList.add('btn', 'btn-primary');
-        // btnCalculate.type = 'button';
-        // btnCalculate.textContent = 'Рассчитать';
-        // btnCalculate.onclick = calculateAndSave();
-        // floorsContainer.appendChild(btnCalculate);
-        //
         floorsContainer.appendChild(floorData);
+        updateInsulationOptions(i);
     }
 
+}
+
+// Функция для обновления списка утеплителей в зависимости от толщины стены
+function updateInsulationOptions(floorIndex) {
+    const wallThickness = document.getElementById(`wallThickness-${floorIndex}`).value;
+    const overlapThickness = document.getElementById(`floorThickness-${floorIndex}`).value;
+
+    const insulationSelect = document.getElementById(`insulation-${floorIndex}`);
+    insulationSelect.innerHTML = ''; // Очищаем предыдущие опции
+
+    const insulationOverlapSelect = document.getElementById(`floorInsulation-${floorIndex}`);
+    insulationOverlapSelect.innerHTML = ''; // Очищаем предыдущие опции
+
+    const insulationWallOptions = insulation[wallThickness]
+    const insulationOverlapOptions = insulation[overlapThickness]
+
+
+    // Функция для добавления опций в `select`
+    const addOptions = (select, options) => {
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option.name; // Предполагаем, что `name` есть в объекте утеплителя
+            optionElement.textContent = option.name;
+            select.appendChild(optionElement);
+        });
+    };
+
+    addOptions(insulationSelect, insulationWallOptions);
+    addOptions(insulationOverlapSelect, insulationOverlapOptions);
 }
 
 
