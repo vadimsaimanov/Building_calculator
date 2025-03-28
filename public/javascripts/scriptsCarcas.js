@@ -549,6 +549,29 @@ function collectFormData() {
             count: parseInt(group.querySelector('input[name="intDoorCount"]').value)
         }));
 
+        const externalWallSheathingDiv = document.getElementById(`outerWallsCover-${i}`);
+        const innerWallsDiv = document.getElementById(`innerWalls-${i}`);
+        const overlapsDiv = document.getElementById(`overlaps-${i}`);
+
+        const externalWallSheathing = externalWallSheathingDiv.classList.contains('hidden') === false ? {
+            osb: document.getElementById(`osb-${i}`).value,
+            vaporBarrier: document.getElementById(`vaporBarrier-${i}`).value,
+            windProtection: document.getElementById(`windProtection-${i}`).value,
+            insulation: document.getElementById(`insulation-${i}`).value
+        } : null ;
+
+        const overlaps = overlapsDiv.classList.contains('hidden') === false ?  {
+            floorThickness: parseInt(document.getElementById(`floorThickness-${i}`)?.value) || null,
+            osb: document.getElementById(`floorOsb-${i}`)?.value || null,
+            vaporBarrier: document.getElementById(`floorVaporBarrier-${i}`)?.value || null,
+            windProtection: document.getElementById(`floorWindProtection-${i}`)?.value || null,
+            insulation: document.getElementById(`floorInsulation-${i}`)?.value || null
+        } : null;
+
+        const innerWallSheathing = innerWallsDiv.classList.contains('hidden') === false ? {
+            osb: document.getElementById(`innerOsb-${i}`)?.value || null
+        } : null;
+
         const floorData = {
             floorNumber: i + 1,
             height: parseFloat(document.getElementById(`floorHeight-${i}`).value),
@@ -557,27 +580,15 @@ function collectFormData() {
             wallThickness: parseInt(document.getElementById(`wallThickness-${i}`).value),
             innerWallLength: parseFloat(document.getElementById(`innerWallLength-${i}`).value),
             innerWallThickness: parseInt(document.getElementById(`innerWallThickness-${i}`).value),
-            externalWallSheathing: {
-                osb: document.getElementById(`osb-${i}`).value,
-                vaporBarrier: document.getElementById(`vaporBarrier-${i}`).value,
-                windProtection: document.getElementById(`windProtection-${i}`).value,
-                insulation: document.getElementById(`insulation-${i}`).value
-            },
-            innerWallSheathing: {
-                osb: document.getElementById(`innerOsb-${i}`)?.value || null
-            },
+            externalWallSheathing: externalWallSheathing,
+            innerWallSheathing: innerWallSheathing,
             windows: windows,
             externalDoors: externalDoors,
             internalDoors: internalDoors,
-            overlaps: {
-                floorThickness: parseInt(document.getElementById(`floorThickness-${i}`)?.value) || null,
-                osb: document.getElementById(`floorOsb-${i}`)?.value || null,
-                vaporBarrier: document.getElementById(`floorVaporBarrier-${i}`)?.value || null,
-                windProtection: document.getElementById(`floorWindProtection-${i}`)?.value || null,
-                insulation: document.getElementById(`floorInsulation-${i}`)?.value || null
-            }
+            overlaps: overlaps
         };
 
+        console.log(floorData)
         floors.push(floorData);
     }
 

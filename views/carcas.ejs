@@ -43,7 +43,7 @@
 
 <!-- Поле для ввода адреса и кнопки -->
 <div class="address-input-container">
-    <input type="text" class="form-control" id="addressInput" placeholder="Добавить адрес объекта строительства" value="<%= calculation.address_object_constractions%>">
+    <input type="text" class="form-control" id="addressInput" placeholder="Добавить адрес объекта строительства" value="<%= calculation === undefined ? '' : calculation.address_object_constractions%>">
     <button type="button" class="btn btn-success" id="saveAddressButton" onclick="saveAddress()">Сохранить</button>
     <button type="button" class="btn btn-danger" id="clearCalculationButton" onclick="clearCalculation()">Очистить расчет</button>
 </div>
