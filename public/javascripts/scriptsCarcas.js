@@ -478,7 +478,7 @@ function goBack() {
     }
 }
 // Функция для загрузки данных пользователя при открытии страницы каркаса
-function onLoadCarcas(floorData) {
+function onLoadCarcas(floorsDBData) {
     const name = document.getElementById('name');
     const status = document.getElementById('user-status');
 
@@ -505,9 +505,8 @@ function onLoadCarcas(floorData) {
         });
     });
 
-    console.log(floorData)
-    if(floorData !== null) {
-        loadFloorsSavedToDB(floorData);
+    if(floorsDBData !== null) {
+        loadFloorsSavedToDB(floorsDBData);
     }
 
     //onFloorCountChange()
@@ -517,10 +516,113 @@ function onLoadCarcas(floorData) {
     // } else
     //     onFloorCountChange(countFloor);
 }
+function roundNumber(value, decimals = 2) {
+    return parseFloat(value.toFixed(decimals));
+}
 
-async function loadFloorsSavedToDB(floorData) {
+function populateWindowsAndDoors(floorData) {
+    floorData.forEach((floor, i) => {
+        if (floor.windows.length > 0 || floor.externalDoors.length > 0 || floor.internalDoors.length > 0) {
+            document.getElementById(`windowsDoors-${i}`).classList.remove('hidden');
+        }
+
+        // Заполняем окна
+        floor.windows.forEach((window) => {
+            addWindow(i); // Создаем блок
+            const index = document.getElementById(`windowsContainer-${i}`).children.length - 1;
+            document.getElementById(`window-${i}-${index}-width`).value = roundNumber(window.width);
+            document.getElementById(`window-${i}-${index}-height`).value = roundNumber(window.height);
+            document.getElementById(`window-${i}-${index}-count`).value = window.amount;
+        });
+
+        // Заполняем внешние двери
+        floor.externalDoors.forEach((door) => {
+            addExternalDoor(i); // Создаем блок
+            const index = document.getElementById(`externalDoorsContainer-${i}`).children.length - 1;
+            document.getElementById(`external-door-${i}-${index}-width`).value = roundNumber(door.width);
+            document.getElementById(`external-door-${i}-${index}-height`).value = roundNumber(door.height);
+            document.getElementById(`external-door-${i}-${index}-count`).value = door.amount;
+        });
+
+        // Заполняем внутренние двери
+        floor.internalDoors.forEach((door) => {
+            addInternalDoor(i); // Создаем блок
+            const index = document.getElementById(`internalDoorsContainer-${i}`).children.length - 1;
+            document.getElementById(`internal-door-${i}-${index}-width`).value = roundNumber(door.width);
+            document.getElementById(`internal-door-${i}-${index}-height`).value = roundNumber(door.height);
+            document.getElementById(`internal-door-${i}-${index}-count`).value = door.amount;
+        });
+    });
+}
+
+function loadFloorsSavedToDB(floorData) {
     console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     console.log(floorData)
+
+    if (floorData.length === 0) return;
+
+    document.getElementById('calculate-btn').innerText = 'Обновить и рассчитать';
+    onFloorCountChange(floorData.length);
+    const select = document.getElementById('floorCount');
+
+    if(select) select.value = floorData.length;
+
+    for (let i = 0; i < floorData.length; i++) {
+        // Селекторы для внешних стен
+        const selectOSBExternal = document.getElementById(`osb-${i}`)
+        const selectVaporBarrierExternal = document.getElementById(`vaporBarrier-${i}`)
+        const selectWindProtectionExternal = document.getElementById(`windProtection-${i}`)
+        const selectInsulationExternal = document.getElementById(`insulation-${i}`)
+
+        // Селекторы для перекрытий
+        const selectFloorThickness = document.getElementById(`floorThickness-${i}`)
+        const selectFloorOSB = document.getElementById(`floorOsb-${i}`)
+        const selectFloorVaporBarrier = document.getElementById(`floorVaporBarrier-${i}`)
+        const selectFloorWindProtection = document.getElementById(`floorWindProtection-${i}`)
+        const selectFloorInsulation = document.getElementById(`floorInsulation-${i}`)
+
+        // Основные параметры этажа
+        document.getElementById(`floorHeight-${i}`).value = floorData[i].floor_height;
+        document.getElementById(`wallPerimeter-${i}`).value = floorData[i].perimeter_of_external_walls;
+        document.getElementById(`baseArea-${i}`).value = floorData[i].base_area;
+        document.getElementById(`wallThickness-${i}`).value = floorData[i].external_wall_thickness;
+        document.getElementById(`innerWallLength-${i}`).value = floorData[i].internal_wall_length;
+        document.getElementById(`innerWallThickness-${i}`).value = floorData[i].internal_wall_thickness;
+
+        updateInsulationOptions(i)
+        // Обшивка внешних стен
+        if (floorData[i].options.isExternalWallSheeting) {
+            document.getElementById(`outerWallsCover-${i}`).classList.remove('hidden');
+             if(selectOSBExternal) selectOSBExternal.value = floorData[i].OSB_external_wall;
+             if(selectVaporBarrierExternal) selectVaporBarrierExternal.value = floorData[i].steam_waterproofing_external_wall;
+             if(selectWindProtectionExternal) selectWindProtectionExternal.value = floorData[i].windscreen_extern_wall;
+             if(selectInsulationExternal) selectInsulationExternal.value = floorData[i].insulation_external_wall;
+        }
+        // Обшивка внутренних стен
+        if (floorData[i].options.isInternalWallSheeting){
+            document.getElementById(`innerWalls-${i}`).classList.remove('hidden');
+            const selectOSBInternal = document.getElementById(`innerOsb-${i}`)
+            if(selectOSBInternal) selectOSBInternal.value = floorData[i].OSB_internal_wall;
+        }
+        // Окна и двери
+        if (floorData[i].windows.length > 0 || floorData[i].externalDoors.length > 0 || floorData[i].internalDoors.length > 0){
+            document.getElementById(`windowsDoors-${i}`).classList.remove('hidden');
+
+        }
+
+        // Перекрытия
+        if (floorData[i].options.isOverlaps){
+            document.getElementById(`overlaps-${i}`).classList.remove('hidden');
+            if(selectFloorThickness) selectFloorThickness.value = floorData[i].overlap_thickness;
+            updateInsulationOptions(i)
+            if(selectFloorOSB) selectFloorOSB.value = floorData[i].OSB_thickness;
+            if(selectFloorVaporBarrier) selectFloorVaporBarrier.value = floorData[i].steam_waterproofing_thickness;
+            if(selectFloorWindProtection) selectFloorWindProtection.value = floorData[i].windscreen_thickness;
+            if(selectFloorInsulation) selectFloorInsulation.value = floorData[i].insulation_thickness;
+        }
+    }
+    populateWindowsAndDoors(floorData)
+
 }
 
 function collectFormData() {
@@ -599,10 +701,12 @@ function collectFormData() {
 }
 
 
-async function calculateAndSave(clientId) {
+async function calculateAndSave(clientId, floorData) {
     const data = collectFormData();
+    let query = "saveCarcasData";
+    if (floorData.length !== 0) query = "updateCarcasData"
     try {
-        const response = await fetch('saveCarcasData', {
+        const response = await fetch(query, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

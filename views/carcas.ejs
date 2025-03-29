@@ -9,12 +9,13 @@
     <script src="/javascripts/scriptsCarcas.js"></script>
     <title>Каркас</title>
     <script>
-        const floors = <%- JSON.stringify(floorsData) %>;
+
+        const floorsDBData = <%- JSON.stringify(floorsData) %>;
         const insulation = <%- JSON.stringify(insulation) %>;
     </script>
 </head>
 
-<body onload="onLoadCarcas(floors)">
+<body onload="onLoadCarcas(floorsDBData)">
 <div class="header">
     <!-- Логотип и информация о клиенте -->
     <div class="logo-and-client-info">
@@ -50,7 +51,7 @@
 
 <!-- Контейнер для исходных данных -->
 <div class="source-data-container">
-    <h2>Исходные данные</h2>
+    <h2><%= (operation === 'add' ? "Добавление" : "Редактирование") + " исходных данных"%></h2>
     <div class="spacer"></div>
     <div class="form-group">
         <label for="floorCount">Количество этажей</label>
@@ -70,7 +71,7 @@
 
     <!-- Кнопка Рассчитать -->
     <div class="calculation-btn-div hidden" id="calculation-div">
-        <button type="button" class="btn btn-primary" onclick="calculateAndSave(<%= client.id %>)">Рассчитать</button>
+        <button type="button" class="btn btn-primary" onclick="calculateAndSave(<%= client.id %>, floorsDBData)" id="calculate-btn">Рассчитать</button>
     </div>
 
 </div>

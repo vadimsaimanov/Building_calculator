@@ -46,6 +46,11 @@ function goBack(){
         window.location.href = `http://localhost:3000/client/${clientId}`;
     }
 }
+function onClickEdit(){
+    const currentUrl = window.location.href; // Текущий URL
+    const newUrl = currentUrl.replace(/\/result$/, ""); // Убираем `/carcas/result`
+    window.location.href = newUrl; // Перенаправляем пользователя
+}
 
 function openCalculationPage(clientId, calculationId) {
     // Здесь вы можете добавить код для открытия новой страницы с расчетом
