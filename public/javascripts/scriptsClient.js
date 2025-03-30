@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация модального окна
     const createClientModal = document.getElementById('createClientModal');
     if (createClientModal) {
         createClientModal.addEventListener('show.bs.modal', function() {
-            // Сброс формы при открытии модального окна
             resetClientForm();
         });
     }
@@ -22,7 +20,6 @@ function resetClientForm() {
 }
 
 async function OnClickSaveClient() {
-    // Получаем значения полей
     const lastName = document.getElementById('lastName').value.trim();
     const firstName = document.getElementById('firstName').value.trim();
     const middleName = document.getElementById('middleName').value.trim();
@@ -30,60 +27,69 @@ async function OnClickSaveClient() {
     const email = document.getElementById('email').value.trim();
     const address = document.getElementById('address').value.trim();
 
-    // Сбрасываем все ошибки перед новой проверкой
     resetClientForm();
 
     let isValid = true;
 
-    // Валидация фамилии (обязательное поле, без цифр и спецсимволов)
+    // Валидация фамилии
     if (!lastName) {
         showError('lastName', 'Пожалуйста, введите фамилию');
         isValid = false;
-    } else if (/[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(lastName)) {
-        showError('lastName', 'Фамилия не должна содержать цифры или специальные символы');
+    } else if (lastName.length < 2 || lastName.length > 50) {
+        showError('lastName', 'Фамилия должна быть от 2 до 50 символов');
+        isValid = false;
+    } else if (/[0-9!@#$%^&*()_+=\[\]{};':"\\|,.<>\/?]/.test(lastName.replace(/-/g, ''))) {
+        showError('lastName', 'Фамилия содержит недопустимые символы');
         isValid = false;
     }
 
-    // Валидация имени (обязательное поле, без цифр и спецсимволов)
+    // Валидация имени
     if (!firstName) {
         showError('firstName', 'Пожалуйста, введите имя');
         isValid = false;
-    } else if (/[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(firstName)) {
-        showError('firstName', 'Имя не должно содержать цифры или специальные символы');
+    } else if (firstName.length < 2 || firstName.length > 50) {
+        showError('firstName', 'Имя должно быть от 2 до 50 символов');
+        isValid = false;
+    } else if (/[0-9!@#$%^&*()_+=\[\]{};':"\\|,.<>\/?]/.test(firstName.replace(/-/g, ''))) {
+        showError('firstName', 'Имя содержит недопустимые символы');
         isValid = false;
     }
 
-    // Валидация отчества (обязательное поле, без цифр и спецсимволов)
+    // Валидация отчества
     if (!middleName) {
         showError('middleName', 'Пожалуйста, введите отчество');
         isValid = false;
-    } else if (/[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(middleName)) {
-        showError('middleName', 'Отчество не должно содержать цифры или специальные символы');
+    } else if (middleName.length < 2 || middleName.length > 50) {
+        showError('middleName', 'Отчество должно быть от 2 до 50 символов');
+        isValid = false;
+    } else if (/[0-9!@#$%^&*()_+=\[\]{};':"\\|,.<>\/?]/.test(middleName.replace(/-/g, ''))) {
+        showError('middleName', 'Отчество содержит недопустимые символы');
         isValid = false;
     }
 
-    // Валидация телефона (обязательное поле, только цифры и допустимые символы)
+    // Валидация телефона
+    const cleanPhone = phone.replace(/\D/g, '');
     if (!phone) {
         showError('phone', 'Пожалуйста, введите телефон');
         isValid = false;
-    } else if (/[a-zA-Zа-яА-Я]/.test(phone)) {
-        showError('phone', 'Телефон не должен содержать буквы');
+    } else if (cleanPhone.length < 10 || cleanPhone.length > 15) {
+        showError('phone', 'Телефон должен содержать от 10 до 15 цифр');
         isValid = false;
     } else if (!/^[\d\s\-\+\(\)]+$/.test(phone)) {
         showError('phone', 'Телефон содержит недопустимые символы');
         isValid = false;
     }
 
-    // Валидация email (обязательное поле, проверка формата)
+    // Валидация email
     if (!email) {
         showError('email', 'Пожалуйста, введите email');
         isValid = false;
     } else if (!validateEmail(email)) {
-        showError('email', 'Пожалуйста, введите корректный email (например, user@example.com)');
+        showError('email', 'Пожалуйста, введите корректный email');
         isValid = false;
     }
 
-    // Валидация адреса (обязательное поле, без дополнительных проверок)
+    // Валидация адреса
     if (!address) {
         showError('address', 'Пожалуйста, введите адрес');
         isValid = false;
@@ -93,7 +99,7 @@ async function OnClickSaveClient() {
         return;
     }
 
-    const managerId = 1; // ID менеджера, который добавляет клиента
+    const managerId = 1;
 
     try {
         const response = await fetch('/client/add', {
@@ -105,7 +111,7 @@ async function OnClickSaveClient() {
                 lastName,
                 firstName,
                 middleName,
-                phone,
+                phone: cleanPhone,
                 email,
                 address,
                 managerId
@@ -115,18 +121,13 @@ async function OnClickSaveClient() {
         const data = await response.json();
 
         if (data.success) {
-            // Закрываем модальное окно
             const modal = bootstrap.Modal.getInstance(document.getElementById('createClientModal'));
             modal.hide();
-
-            // Обновляем страницу
             window.location.reload();
         } else {
-            console.log('Невозможно добавить клиента:', data.message);
             alert('Невозможно добавить клиента: ' + data.message);
         }
     } catch (error) {
-        console.error('Ошибка сети:', error);
         alert('Ошибка сети: ' + error.message);
     }
 }
@@ -146,15 +147,8 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-function validatePhone(phone) {
-    // Более гибкая проверка номера телефона
-    const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-    return re.test(String(phone));
-}
-
 function goBack() {
     if (window.location.pathname.includes('/client/') || window.location.pathname.includes('/carcas')) {
-        // Если пользователь на странице каркаса, возвращаем его на страницу карточки клиента
         const clientId = window.location.pathname.split('/')[2];
         window.location.href = `/client/${clientId}`;
     } else if (window.location.pathname === '/client') {
