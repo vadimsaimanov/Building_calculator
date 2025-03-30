@@ -704,7 +704,7 @@ function collectFormData() {
 async function calculateAndSave(clientId, floorData) {
     const data = collectFormData();
     let query = "saveCarcasData";
-    if (floorData.length !== 0) query = "updateCarcasData"
+    //if (floorData.length !== 0) query = "updateCarcasData"
     try {
         const response = await fetch(query, {
             method: 'POST',
