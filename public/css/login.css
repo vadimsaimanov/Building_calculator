@@ -1,49 +1,65 @@
-.body{
+body {
     background-color: #fff;
 }
+
 .login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* Занимает всю высоту экрана */
-    margin-top: -60px; /* Сдвигаем контейнер вверх, чтобы логотип был выше */
+    height: 100vh;
+    margin-top: -60px;
 }
 
 .login-container img {
     max-width: 15%;
     height: auto;
-    display: block; /* Отображение блока */
-    margin-top: 20px; /* Отступ сверху 20px и центрирование */
+    display: block;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .login-container input {
-    margin: 5px 0; /* Отступы между полями ввода */
+    margin: 5px 0;
     padding: 10px;
     width: 200px;
-    border: 1px solid #ccc; /* Граница поля ввода */
-    border-radius: 4px; /* Скругление углов */
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
+
 .login-container button {
-    margin-top: 10px; /* Уменьшенный отступ сверху для кнопки */
+    margin-top: 10px;
     width: 100px;
 }
 
 .login-container .input-with-icon {
-    display: flex; /* Используем Flexbox */
-    flex-direction: column; /* Элементы в столбце */
-    align-items: flex-start; /* Выравнивание по левому краю */
-    margin: 5px 0; /* Отступы между элементами */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 5px 0;
 }
 
 .login-container .input-with-icon .input-group {
     display: flex;
-    align-items: center; /* Выравнивание иконки и поля ввода по вертикали */
-    margin-bottom: 10px; /* Отступ между группами (логин и пароль) */
+    align-items: center;
+    margin-bottom: 5px;
+    position: relative;
 }
 
 .login-container .input-with-icon .input-group i {
-    margin-right: 10px; /* Отступ между иконкой и полем ввода */
-    font-size: 1.2em; /* Размер иконки */
+    margin-right: 10px;
+    font-size: 1.2em;
 }
+
+/* Стили для ошибок */
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.8em;
+    margin-left: 0; /* Убираем отступ слева */
+    margin-top: 2px;
+    margin-bottom: 5px;
+    width: 200px;
+    padding-left: 3px; /* Добавляем padding вместо margin для выравнивания */
+    box-sizing: border-box;
+}
+

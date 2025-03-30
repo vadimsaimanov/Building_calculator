@@ -111,3 +111,23 @@ h1 {
     transform: translateY(-5px); /* Сдвиг вверх */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
 }
+/* Стили для ошибок в форме */
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+/* Стили для модального окна */
+.modal-content {
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: none;
+    padding-top: 0;
+}
