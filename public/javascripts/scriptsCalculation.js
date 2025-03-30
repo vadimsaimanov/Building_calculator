@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Обработчик события для изменения текста кнопки "Статус"
-    document.getElementById('statusButton').addEventListener('click', function() {
-        this.textContent = 'Актуализировать';
-    });
+    // document.getElementById('statusButton').addEventListener('click', function() {
+    //     this.textContent = 'Актуализировать';
+    // });
 
     // Пример использования функции для изменения текста элемента
     const calculations = document.querySelectorAll(".calculation");
@@ -50,6 +50,30 @@ function onClickEdit(){
     const currentUrl = window.location.href; // Текущий URL
     const newUrl = currentUrl.replace(/\/result$/, ""); // Убираем `/carcas/result`
     window.location.href = newUrl; // Перенаправляем пользователя
+}
+
+async function actualize(){
+    try {
+        const response = await fetch('result/updatePrices', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: null
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            alert('Цены обновлены успешно!');
+            window.location.reload();
+        } else {
+            console.log('Невозможно обновить цены: ', result.message);
+        }
+    } catch (error) {
+        console.error('Ошибка сети:', error);
+    }
 }
 
 function openCalculationPage(clientId, calculationId) {
