@@ -75,6 +75,27 @@ async function actualize(){
         console.error('Ошибка сети:', error);
     }
 }
+async function getDocument(clientId, calculationId) {
+    try{
+        const response = await fetch(`/api/result/getDocument/${clientId}/${calculationId}`);
+        if (!response.ok) {
+            throw new Error('Ошибка при получении файла');
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "contract.pdf";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Ошибка загрузки:', error);
+    }
+
+}
 
 function openCalculationPage(clientId, calculationId) {
     // Здесь вы можете добавить код для открытия новой страницы с расчетом
@@ -89,5 +110,12 @@ document.addEventListener("DOMContentLoaded", function() {
     clientInfo.addEventListener("click", function(event) {
         event.preventDefault(); // Предотвращаем переход по ссылке, если это ссылка
         createClientModal.show();
+    });
+    const getDocBtn = document.getElementById('get-document-btn');
+    const createDocumentModal = new bootstrap.Modal(document.getElementById("createDocumentModal"));
+
+    getDocBtn.addEventListener("click", function(event) {
+        event.preventDefault(); // Предотвращаем переход по ссылке, если это ссылка
+        createDocumentModal.show();
     });
 });

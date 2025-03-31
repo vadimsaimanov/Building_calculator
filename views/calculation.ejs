@@ -49,6 +49,7 @@
     <i class="bi bi-plus-circle"></i>
     <span>Результат расчета каркаса</span>
     <i class="bi bi-pen" title="Редактировать" onclick="onClickEdit()"></i>
+    <button type="button" class="btn btn-primary" id="get-document-btn" >Получить договор</button>
 </div>
 
 <div class="container mt-3">
@@ -150,6 +151,21 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                 <button type="button" class="btn btn-primary">Сохранить</button>
                 <button type="button" class="btn btn-warning">Редактировать</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="createDocumentModal" tabindex="-1" aria-labelledby="createDocumentModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createClientModalLabel">Загрузка договора</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" onclick="getDocument(<%= client.id%>, <%= calculation.id%>)">Скачать договор</button>
+                <button type="button" class="btn btn-warning">Заключить договор</button>
             </div>
         </div>
     </div>
