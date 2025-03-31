@@ -48,3 +48,21 @@ function openCalculationPage(clientId, calculationId) {
     console.log("Открыть страницу расчета:", calculationId);
     window.location.href = `/client/${clientId}/${calculationId}/carcas/result`;
 }
+
+async function deleteCalculation(clientId, calculationId) {
+    try{
+        const response = await fetch(`${clientId}/deleteCalculation/${calculationId}`);
+        const result = await response.json();
+
+        if (result.success) {
+
+            alert('Расчет успешно удален!');
+            window.location.reload();
+        } else {
+            console.log('Невозможно удалить расчет: ', result.message);
+        }
+    } catch (error) {
+        console.error('Ошибка сети:', error);
+    }
+
+}
