@@ -34,7 +34,18 @@
     <!-- Заголовок "Расчет" и кнопка "Статус" -->
     <div class="header-center">
         <h1>Расчет</h1>
-        <button type="button" class="btn btn-primary" id="statusButton" onclick="actualize()">Статус</button>
+        <div id="status-div" class="">
+            <button type="button" class="btn btn-primary" id="statusButton" onclick="changeBtn('<%= calculation.status%>')"><%= calculation.status%></button>
+        </div>
+        <div id="document-div" class="hidden">
+            <button type="button" class="hidden btn btn-primary" id="get-document-btn" >Получить договор</button>
+        </div>
+        <div id="actualize-div" class="hidden">
+            <button type="button" class="hidden btn btn-primary" id="actualize-btn" onclick="actualize()">Актуализировать</button>
+        </div>
+
+
+
     </div>
 
     <!-- Блок с именем и должностью -->
@@ -49,7 +60,7 @@
     <i class="bi bi-plus-circle"></i>
     <span>Результат расчета каркаса</span>
     <i class="bi bi-pen" title="Редактировать" onclick="onClickEdit()"></i>
-    <button type="button" class="btn btn-primary" id="get-document-btn" >Получить договор</button>
+
 </div>
 
 <div class="container mt-3">
@@ -116,34 +127,34 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createClientModalLabel">Создание клиента</h5>
+                <h5 class="modal-title" id="createClientModalLabel">Редактирование клиента</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
                         <label for="lastName" class="form-label">Фамилия</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Введите фамилию">
+                        <input type="text" class="form-control" id="lastName" placeholder="Введите фамилию" value="<%=client.last_name%>">
                     </div>
                     <div class="mb-3">
                         <label for="firstName" class="form-label">Имя</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="Введите имя">
+                        <input type="text" class="form-control" id="firstName" placeholder="Введите имя" value="<%=client.first_name%>">
                     </div>
                     <div class="mb-3">
                         <label for="middleName" class="form-label">Отчество</label>
-                        <input type="text" class="form-control" id="middleName" placeholder="Введите отчество">
+                        <input type="text" class="form-control" id="middleName" placeholder="Введите отчество" value="<%=client.second_name%>">
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Телефон</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="Введите телефон">
+                        <input type="tel" class="form-control" id="phone" placeholder="Введите телефон" value="<%=client.phone%>">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Введите email">
+                        <input type="email" class="form-control" id="email" placeholder="Введите email" value="<%=client.email%>">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Адрес</label>
-                        <input type="text" class="form-control" id="address" placeholder="Введите адрес">
+                        <input type="text" class="form-control" id="address" placeholder="Введите адрес" value="<%=client.adress%>">
                     </div>
                 </form>
             </div>

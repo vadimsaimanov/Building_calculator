@@ -10,7 +10,9 @@
     position: relative;
     flex-wrap: wrap; /* Добавлено для адаптивности */
 }
-
+.hidden {
+    display: none;
+}
 /* Контейнер для логотипа и информации о клиенте */
 .logo-and-client-info {
     display: flex;

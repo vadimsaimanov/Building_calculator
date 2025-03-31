@@ -54,7 +54,7 @@ function onClickEdit(){
 
 async function actualize(){
     try {
-        const response = await fetch('result/updatePrices', {
+        const response = await fetch('result/actualize', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -66,14 +66,26 @@ async function actualize(){
 
         if (result.success) {
 
-            alert('Цены обновлены успешно!');
+            alert('Расчет актуализирован успешно!');
             window.location.reload();
         } else {
-            console.log('Невозможно обновить цены: ', result.message);
+            console.log('Невозможно актуализировать расчет: ', result.message);
         }
     } catch (error) {
         console.error('Ошибка сети:', error);
     }
+}
+function changeBtn(calculationStatus){
+    const docButton = document.getElementById("document-div");
+    const statusButton = document.getElementById("status-div");
+    const actualizeButton = document.getElementById("actualize-div");
+
+    if (calculationStatus === "Не актуален") {
+        actualizeButton.classList.remove("hidden");
+    } else if (calculationStatus === "Актуален") {
+        docButton.classList.remove("hidden");
+    }
+    statusButton.classList.add("hidden");
 }
 async function getDocument(clientId, calculationId) {
     try{
@@ -111,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault(); // Предотвращаем переход по ссылке, если это ссылка
         createClientModal.show();
     });
+
     const getDocBtn = document.getElementById('get-document-btn');
     const createDocumentModal = new bootstrap.Modal(document.getElementById("createDocumentModal"));
 
