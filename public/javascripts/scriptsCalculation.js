@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-function goBack(){
+function goBackClientCard(){
     const pathParts = window.location.pathname.split("/"); // Разбиваем URL на части
     const clientId = pathParts[2]; // Получаем clientId (он находится на 2-м месте в массиве)
 
@@ -107,6 +107,81 @@ async function getDocument(clientId, calculationId) {
         console.error('Ошибка загрузки:', error);
     }
 
+}
+function OnClickEdit(){
+    const lastName = document.getElementById("lastName");
+    const firstName = document.getElementById("firstName");
+    const middleName = document.getElementById("middleName");
+    const phone = document.getElementById("phone");
+    const email = document.getElementById("email");
+    const address = document.getElementById("address");
+    const saveClientBtn = document.getElementById("save-client-btn");
+    saveClientBtn.classList.remove('hidden');
+    event.target.classList.add('hidden');
+    const fields = [lastName, firstName, middleName, phone, email, address];
+
+    fields.forEach(field => {
+      field.readOnly = false;
+      field.classList.remove('readonly');
+    })
+
+}
+async function OnClickSaveEditClient(clientId) {
+    const valid = validateSaveClient();
+    const dataValid = valid.data;
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!valid.isValid) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`/client/${clientId}/update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                lastName: dataValid.lastName,
+                firstName: dataValid.firstName,
+                middleName: dataValid.middleName,
+                phone: dataValid.cleanPhone,
+                email: dataValid.email,
+                address: dataValid.address,
+                managerId: user.id
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            window.location.reload();
+        } else {
+            alert('Невозможно добавить клиента: ' + data.message);
+        }
+    } catch (error) {
+        alert('Ошибка сети: ' + error.message);
+    }
+}
+async function documentSetStatus(clientId, calculationId){
+    try{
+        const response = await fetch('result/setDocumentStatus', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: null
+        });
+        const result = await response.json();
+        if (result.success) {
+
+            alert('Статус документа успешно изменен!');
+            window.location.reload();
+        } else {
+            console.log('Невозможно изменить статус документа:', result.message);
+        }
+    } catch (error) {
+        console.error('Ошибка загрузки:', error);
+    }
 }
 
 function openCalculationPage(clientId, calculationId) {

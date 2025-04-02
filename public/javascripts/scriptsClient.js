@@ -19,7 +19,7 @@ function resetClientForm() {
     });
 }
 
-async function OnClickSaveClient() {
+function validateSaveClient() {
     const lastName = document.getElementById('lastName').value.trim();
     const firstName = document.getElementById('firstName').value.trim();
     const middleName = document.getElementById('middleName').value.trim();
@@ -95,12 +95,19 @@ async function OnClickSaveClient() {
         isValid = false;
     }
 
+    return {isValid, data: {lastName, firstName, middleName, cleanPhone, email, address}};
+}
+async function OnClickSaveClient() {
+
+
+    const valid = validateSaveClient();
+    const isValid = valid.isValid;
+    const dataValid = valid.data;
+    const user = JSON.parse(localStorage.getItem("user"));
+
     if (!isValid) {
         return;
     }
-
-    const managerId = 1;
-
     try {
         const response = await fetch('/client/add', {
             method: 'POST',
@@ -108,13 +115,13 @@ async function OnClickSaveClient() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                lastName,
-                firstName,
-                middleName,
-                phone: cleanPhone,
-                email,
-                address,
-                managerId
+                lastName: dataValid.lastName,
+                firstName: dataValid.firstName,
+                middleName: dataValid.middleName,
+                phone: dataValid.cleanPhone,
+                email: dataValid.email,
+                address: dataValid.address,
+                managerId: user.id
             })
         });
 

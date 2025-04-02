@@ -11,7 +11,7 @@
     flex-wrap: wrap; /* Добавлено для адаптивности */
 }
 .hidden {
-    display: none;
+    display: none !important;
 }
 /* Контейнер для логотипа и информации о клиенте */
 .logo-and-client-info {
@@ -49,6 +49,9 @@
 
 .client-info strong {
     font-weight: bold;
+}
+.readonly {
+    color: #999999 !important;
 }
 
 /* Блок с действиями (стрелка и информация) */
