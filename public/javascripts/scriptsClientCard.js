@@ -48,6 +48,23 @@ function openCalculationPage(clientId, calculationId) {
     console.log("Открыть страницу расчета:", calculationId);
     window.location.href = `/client/${clientId}/${calculationId}/carcas/result`;
 }
+async function deleteClient(clientId) {
+    try{
+
+        const response = await fetch(`${clientId}/deleteCustomer`);
+        const result = await response.json();
+
+        if (result.success) {
+
+            alert('Клиент успешно удален!');
+            window.location.href = '/client';
+        } else {
+            console.log('Невозможно удалить клиента: ', result.message);
+        }
+    } catch (error) {
+        console.error('Ошибка сети:', error);
+    }
+}
 async function duplicateCalculation(clientId, calculationId) {
     try{
         const response = await fetch(`${clientId}/duplicateCalculation/${calculationId}`);

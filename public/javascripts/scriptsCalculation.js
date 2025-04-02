@@ -43,7 +43,7 @@ function goBackClientCard(){
     const clientId = pathParts[2]; // Получаем clientId (он находится на 2-м месте в массиве)
 
     if (clientId) {
-        window.location.href = `http://localhost:3000/client/${clientId}`;
+        window.location.href = window.location.origin +`/client/${clientId}`;
     }
 }
 function onClickEdit(){

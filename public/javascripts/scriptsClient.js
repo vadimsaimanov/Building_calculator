@@ -170,7 +170,7 @@ function openClientCard(clientId) {
     window.location.href = `/client/${clientId}`;
 }
 
-function onLoadClientCard() {
+function onLoadClient() {
     const name = document.getElementById('name');
     const status = document.getElementById('user-status');
 
@@ -179,6 +179,7 @@ function onLoadClientCard() {
         window.location.href = '/login';
     } else {
         const user = JSON.parse(localUser);
+        console.log(user);
         name.innerHTML = `${user.first_name} ${user.last_name}`;
         status.innerText = user.status;
     }

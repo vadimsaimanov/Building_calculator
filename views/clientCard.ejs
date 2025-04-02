@@ -24,9 +24,12 @@
 
     <!-- Блок с действиями (стрелка и кнопка) -->
     <div class="actions">
-        <i class="bi bi-arrow-left" onclick="goBack()"></i> <!-- Добавляем обработчик -->
+        <i class="bi bi-arrow-left" onclick="goBack()"></i>
         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createCalculationModal">
             Создать расчет
+        </button>
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createClientDeletionModal">
+            Удалить клиента
         </button>
     </div>
 
@@ -113,6 +116,21 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Модальное окно для выбора конструктивного элемента -->
+<div class="modal fade" id="createClientDeletionModal" tabindex="-1" aria-labelledby="createClientDeletionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createClientDeletionModalLabel">Удалить клиента <%= client.first_name + ' ' + client.second_name + ' ' + client.last_name%>?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="deleteClient(<%= client.id%>)">Удалить</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
             </div>
         </div>
