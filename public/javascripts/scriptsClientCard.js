@@ -36,6 +36,7 @@ function onLoadClientCard() {
 async function openCarcasPage(clientId) {
     const calculationId = "new" ;
     window.location.href = `/client/${clientId}/${calculationId}/carcas`;
+    localStorage.removeItem('floorsData');
 
 }
 // function openCalculationPage(clientId, calculationId) {

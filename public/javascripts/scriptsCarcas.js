@@ -1,67 +1,24 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // const name = document.getElementById('name');
-    // const status = document.getElementById('user-status');
-    //
-    // // Загрузка данных пользователя
-    // const localUser = localStorage.getItem('user');
-    // if (!localUser) {
-    //     window.location.href = '/login';
-    // } else {
-    //     const user = JSON.parse(localUser);
-    //     name.innerHTML = `${user.first_name} ${user.last_name}`;
-    //     status.innerText = user.status;
-    // }
-    //
-    // // Загрузка сохраненного адреса
-    // const savedAddress = localStorage.getItem('savedAddress');
-    // if (savedAddress) {
-    //     document.getElementById('addressInput').value = savedAddress;
-    // }
+// window.addEventListener("beforeunload", (event) => {
+//     event.preventDefault(); // Некоторые браузеры требуют этого вызова
+//     event.returnValue = "Все несохранённые данные будут утеряны!"; // Сообщение пользователю
+// });
+function setupAutoSave() {
+    document.querySelectorAll("input, select").forEach((element) => {
+        element.addEventListener("input", () => {
+            const floorsData = collectFormData();
+            saveFloorsToLocalStorage(floorsData);
+            console.log('saved');
+        });
+    });
+}
+function saveFloorsToLocalStorage(floorsData) {
+    localStorage.setItem("floorsData", JSON.stringify(floorsData));
+}
+function loadFloorsFromLocalStorage() {
+    const storedData = localStorage.getItem("floorsData");
+    return storedData ? JSON.parse(storedData) : null;
+}
 
-    // Обработчик для изменения количества этажей
-    // const floorCountSelect = document.getElementById("floorCount");
-    // const floorsContainer = document.getElementById("floors-container");
-    // floorCountSelect.addEventListener("change", function () {
-    //     const selectedFloorCount = parseInt(floorCountSelect.value);
-    //     updateFloorHeader(selectedFloorCount);
-    //     updateFloors(selectedFloorCount);
-    // });
-
-    // Функция для обновления заголовка этажей
-
-
-    // Функция для получения суффикса этажей
-
-
-
-
-
-    // Назначение обработчиков событий
-    // document.querySelectorAll('.toggle-icon').forEach(icon => {
-    //     icon.addEventListener('click', function () {
-    //         const sectionId = this.getAttribute('onclick').replace("toggleSection('", "").replace("')", "");
-    //         toggleSection(sectionId);
-    //     });
-    // });
-
-    // document.getElementById('floorCount').addEventListener('change', function () {
-    //     const selectedFloorCount = parseInt(this.value);
-    //     updateFloorHeader(selectedFloorCount);
-    //     updateFloors(selectedFloorCount);
-    // });
-
-    // Назначение обработчиков для кнопок добавления
-    // document.getElementById('addWindowButton').addEventListener('click', addWindow);
-    // document.getElementById('addExternalDoorButton').addEventListener('click', addExternalDoor);
-    // document.getElementById('addInternalDoorButton').addEventListener('click', addInternalDoor);
-
-    // Назначение обработчиков для кнопок "Сохранить" и "Очистить расчет"
-    // document.getElementById('saveAddressButton').addEventListener('click', saveAddress);
-    // document.getElementById('clearCalculationButton').addEventListener('click', clearCalculation);
-
-    // Назначение обработчика для кнопки "Рассчитать"
-    // document.getElementById('calculateButton').addEventListener('click', calculateAndSave);
-});
 
 function getFloorSuffix(count) {
     if (count === 1) {
@@ -109,6 +66,7 @@ function toggleSection(id) {
 }
 // Функция для обновления полей этажей
 function updateFloors(count) {
+
     const floorsContainer = document.getElementById("floors-container");
     // Удаляем все существующие этажи
     while (floorsContainer.firstChild) {
@@ -306,6 +264,7 @@ function updateFloors(count) {
         floorsContainer.appendChild(floorData);
         updateInsulationOptions(i);
     }
+    setupAutoSave();
 
 }
 
@@ -436,32 +395,48 @@ async function saveAddress() {
 
 // Функция для сброса данных до дефолтных
 function clearCalculation() {
-    // // Сброс адреса
-    // document.getElementById('addressInput').value = '';
-    // localStorage.removeItem('savedAddress');
-    //
-    // // Сброс количества этажей
-    // const floorCountSelect = document.getElementById('floorCount');
-    // floorCountSelect.value = 1;
-    // updateFloors(1);
-    //
-    // // Сброс остальных полей
-    // document.getElementById('osb').value = '9 мм';
-    // document.getElementById('vaporBarrier').value = 'Ондутис';
-    // document.getElementById('windProtection').value = 'Ветро-влагозащитная мембрана Brane А';
-    // document.getElementById('insulation').value = 'Кнауф ТеплоКнауф 100 мм';
-    // document.getElementById('innerOsb').value = '9 мм';
-    // document.getElementById('floorThickness').value = '200';
-    // document.getElementById('floorOsb').value = '9 мм';
-    // document.getElementById('floorVaporBarrier').value = 'Ондутис';
-    // document.getElementById('floorWindProtection').value = 'Ветро-влагозащитная мембрана Brane А';
-    // document.getElementById('floorInsulation').value = 'Кнауф ТеплоКнауф 100 мм';
-    //
-    // // Очистка окон и дверей
-    // document.getElementById('windowsContainer').innerHTML = '';
-    // document.getElementById('externalDoorsContainer').innerHTML = '';
-    // document.getElementById('internalDoorsContainer').innerHTML = '';
+    document.getElementById('addressInput').value = '';
+    let floorCount = 1;
+    const floorCountElement = document.getElementById('floorCount').value;
+    if (!isNaN(parseInt(floorCountElement)))
+        floorCount = floorCountElement;
 
+    const floorsData = [];
+
+    for (let i = 0; i < floorCount; i++) {
+        floorsData.push({
+            id: null,  // Пока без ID, он будет присвоен при сохранении
+            calculation_id: null, // Тоже пока пустой
+            amount_floor: floorCount,
+            floor_number: i + 1,
+            floor_height: '',
+            perimeter_of_external_walls: '',
+            base_area: '',
+            external_wall_thickness: 200,
+            internal_wall_length: '',
+            internal_wall_thickness: 100,
+            OSB_external_wall: "",
+            steam_waterproofing_external_wall: "",
+            windscreen_extern_wall: "",
+            insulation_external_wall: "",
+            overlap_thickness: "",
+            OSB_thickness: "",
+            steam_waterproofing_thickness: "",
+            windscreen_thickness: "",
+            insulation_thickness: "",
+            OSB_internal_wall: "",
+            windows: [],
+            externalDoors: [],
+            internalDoors: [],
+            options: {
+                isInternalWallSheeting: false,
+                isExternalWallSheeting: false,
+                isOverlaps: false
+            }
+        });
+    }
+
+    loadFloorsSavedToDB(floorsData)
     alert('Все данные сброшены до значений по умолчанию.');
 }
 // Функция для возврата на предыдущую страницу
@@ -505,8 +480,11 @@ function onLoadCarcas(floorsDBData) {
         });
     });
 
-    if(floorsDBData !== null) {
-        loadFloorsSavedToDB(floorsDBData);
+    console.log(loadFloorsFromLocalStorage())
+    if(floorsDBData !== null && floorsDBData.length > 0) {
+        loadFloorsSavedToDB(floorsDBData, false);
+    } else if (localStorage.getItem('floorsData') !== null) {
+        loadFloorsSavedToDB(loadFloorsFromLocalStorage())
     }
 
     //onFloorCountChange()
@@ -555,13 +533,14 @@ function populateWindowsAndDoors(floorData) {
     });
 }
 
-function loadFloorsSavedToDB(floorData) {
+function loadFloorsSavedToDB(floorData, savedToLocalStorage = true) {
     console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     console.log(floorData)
 
     if (floorData.length === 0) return;
 
-    document.getElementById('calculate-btn').innerText = 'Обновить и рассчитать';
+    if(!savedToLocalStorage)
+        document.getElementById('calculate-btn').innerText = 'Обновить и рассчитать';
     onFloorCountChange(floorData.length);
     const select = document.getElementById('floorCount');
 
@@ -630,67 +609,80 @@ function collectFormData() {
     const floorCount = parseInt(document.getElementById('floorCount').value);
 
     for (let i = 0; i < floorCount; i++) {
+        // Окна
         const windows = Array.from(document.querySelectorAll(`#windowsContainer-${i} .window-group`)).map(group => ({
-            height: parseFloat(group.querySelector('input[name="windowHeight"]').value),
+            id: null, // Если нужно, можно добавлять ID
+            type: "window",
             width: parseFloat(group.querySelector('input[name="windowWidth"]').value),
-            count: parseInt(group.querySelector('input[name="windowCount"]').value)
+            height: parseFloat(group.querySelector('input[name="windowHeight"]').value),
+            amount: parseInt(group.querySelector('input[name="windowCount"]').value)
         }));
-        windows.forEach(window => {
-            console.log(`Ширина: ${window.width}, Высота: ${window.height}, Количество: ${window.count}`);
-        });
 
+        // Внешние двери
         const externalDoors = Array.from(document.querySelectorAll(`#externalDoorsContainer-${i} .door-group`)).map(group => ({
-            height: parseFloat(group.querySelector('input[name="extDoorHeight"]').value),
+            id: null,
+            type: "externalDoor",
             width: parseFloat(group.querySelector('input[name="extDoorWidth"]').value),
-            count: parseInt(group.querySelector('input[name="extDoorCount"]').value)
+            height: parseFloat(group.querySelector('input[name="extDoorHeight"]').value),
+            amount: parseInt(group.querySelector('input[name="extDoorCount"]').value)
         }));
 
+        // Внутренние двери
         const internalDoors = Array.from(document.querySelectorAll(`#internalDoorsContainer-${i} .door-group`)).map(group => ({
-            height: parseFloat(group.querySelector('input[name="intDoorHeight"]').value),
+            id: null,
+            type: "internalDoor",
             width: parseFloat(group.querySelector('input[name="intDoorWidth"]').value),
-            count: parseInt(group.querySelector('input[name="intDoorCount"]').value)
+            height: parseFloat(group.querySelector('input[name="intDoorHeight"]').value),
+            amount: parseInt(group.querySelector('input[name="intDoorCount"]').value)
         }));
 
-        const externalWallSheathingDiv = document.getElementById(`outerWallsCover-${i}`);
-        const innerWallsDiv = document.getElementById(`innerWalls-${i}`);
-        const overlapsDiv = document.getElementById(`overlaps-${i}`);
+        // Проверка видимости блоков
+        const isExternalWallSheeting = !document.getElementById(`outerWallsCover-${i}`).classList.contains('hidden');
+        const isInternalWallSheeting = !document.getElementById(`innerWalls-${i}`).classList.contains('hidden');
+        const isOverlaps = !document.getElementById(`overlaps-${i}`).classList.contains('hidden');
 
-        const externalWallSheathing = externalWallSheathingDiv.classList.contains('hidden') === false ? {
-            osb: document.getElementById(`osb-${i}`).value,
-            vaporBarrier: document.getElementById(`vaporBarrier-${i}`).value,
-            windProtection: document.getElementById(`windProtection-${i}`).value,
-            insulation: document.getElementById(`insulation-${i}`).value
-        } : null ;
-
-        const overlaps = overlapsDiv.classList.contains('hidden') === false ?  {
-            floorThickness: parseInt(document.getElementById(`floorThickness-${i}`)?.value) || null,
-            osb: document.getElementById(`floorOsb-${i}`)?.value || null,
-            vaporBarrier: document.getElementById(`floorVaporBarrier-${i}`)?.value || null,
-            windProtection: document.getElementById(`floorWindProtection-${i}`)?.value || null,
-            insulation: document.getElementById(`floorInsulation-${i}`)?.value || null
-        } : null;
-
-        const innerWallSheathing = innerWallsDiv.classList.contains('hidden') === false ? {
-            osb: document.getElementById(`innerOsb-${i}`)?.value || null
-        } : null;
-
+        // Данные по этажу
         const floorData = {
-            floorNumber: i + 1,
-            height: parseFloat(document.getElementById(`floorHeight-${i}`).value),
-            perimeter: parseFloat(document.getElementById(`wallPerimeter-${i}`).value),
-            baseArea: parseFloat(document.getElementById(`baseArea-${i}`).value),
-            wallThickness: parseInt(document.getElementById(`wallThickness-${i}`).value),
-            innerWallLength: parseFloat(document.getElementById(`innerWallLength-${i}`).value),
-            innerWallThickness: parseInt(document.getElementById(`innerWallThickness-${i}`).value),
-            externalWallSheathing: externalWallSheathing,
-            innerWallSheathing: innerWallSheathing,
+            id: null,  // Если ID нужен, можно добавить логику
+            calculation_id: null, // Аналогично с calculation_id
+            amount_floor: floorCount,
+            floor_number: i + 1,
+            floor_height: parseFloat(document.getElementById(`floorHeight-${i}`).value),
+            perimeter_of_external_walls: parseFloat(document.getElementById(`wallPerimeter-${i}`).value),
+            base_area: parseFloat(document.getElementById(`baseArea-${i}`).value),
+            external_wall_thickness: parseInt(document.getElementById(`wallThickness-${i}`).value),
+            internal_wall_length: parseFloat(document.getElementById(`innerWallLength-${i}`).value),
+            internal_wall_thickness: parseInt(document.getElementById(`innerWallThickness-${i}`).value),
+
+            // Обшивка наружных стен
+            OSB_external_wall: isExternalWallSheeting ? document.getElementById(`osb-${i}`).value : null,
+            steam_waterproofing_external_wall: isExternalWallSheeting ? document.getElementById(`vaporBarrier-${i}`).value : null,
+            windscreen_extern_wall: isExternalWallSheeting ? document.getElementById(`windProtection-${i}`).value : null,
+            insulation_external_wall: isExternalWallSheeting ? document.getElementById(`insulation-${i}`).value : null,
+
+            // Перекрытия
+            overlap_thickness: isOverlaps ? parseInt(document.getElementById(`floorThickness-${i}`)?.value) || null : null,
+            OSB_thickness: isOverlaps ? document.getElementById(`floorOsb-${i}`)?.value || null : null,
+            steam_waterproofing_thickness: isOverlaps ? document.getElementById(`floorVaporBarrier-${i}`)?.value || null : null,
+            windscreen_thickness: isOverlaps ? document.getElementById(`floorWindProtection-${i}`)?.value || null : null,
+            insulation_thickness: isOverlaps ? document.getElementById(`floorInsulation-${i}`)?.value || null : null,
+
+            // Обшивка внутренних стен
+            OSB_internal_wall: isInternalWallSheeting ? document.getElementById(`innerOsb-${i}`)?.value || null : null,
+
+            // Окна и двери
             windows: windows,
             externalDoors: externalDoors,
             internalDoors: internalDoors,
-            overlaps: overlaps
+
+            // Опции
+            options: {
+                isInternalWallSheeting: isInternalWallSheeting,
+                isExternalWallSheeting: isExternalWallSheeting,
+                isOverlaps: isOverlaps
+            }
         };
 
-        console.log(floorData)
         floors.push(floorData);
     }
 
@@ -701,7 +693,8 @@ function collectFormData() {
 }
 
 
-async function calculateAndSave(clientId, floorData) {
+
+async function calculateAndSave(clientId) {
     const data = collectFormData();
     let query = "saveCarcasData";
     //if (floorData.length !== 0) query = "updateCarcasData"
