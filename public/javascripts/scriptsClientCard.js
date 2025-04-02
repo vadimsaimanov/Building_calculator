@@ -48,7 +48,22 @@ function openCalculationPage(clientId, calculationId) {
     console.log("Открыть страницу расчета:", calculationId);
     window.location.href = `/client/${clientId}/${calculationId}/carcas/result`;
 }
+async function duplicateCalculation(clientId, calculationId) {
+    try{
+        const response = await fetch(`${clientId}/duplicateCalculation/${calculationId}`);
+        const result = await response.json();
 
+        if (result.success) {
+
+            alert('Расчет успешно дублирован!');
+            window.location.reload();
+        } else {
+            console.log('Невозможно дублировать расчет: ', result.message);
+        }
+    } catch (error) {
+        console.error('Ошибка сети:', error);
+    }
+}
 async function deleteCalculation(clientId, calculationId) {
     try{
         const response = await fetch(`${clientId}/deleteCalculation/${calculationId}`);

@@ -52,7 +52,7 @@
                     <div class="calculation-address"><%= calculation.address_object_constractions %></div>
                 </div>
                 <div class="calculation-actions">
-                    <i class="bi bi-copy"></i>
+                    <i class="bi bi-copy" onclick="duplicateCalculation(<%= calculation.customer_id %>, <%= calculation.calculation_id %>)"></i>
                     <i class="bi bi-trash" onclick="deleteCalculation(<%= calculation.customer_id %>, <%= calculation.calculation_id %>)"></i>
                 </div>
             </div>
