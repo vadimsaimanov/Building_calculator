@@ -29,21 +29,32 @@
         <div class="address-info">
             <p>Дата: <%= calculation.created_date %></p>
             <p>Адрес объекта: <%= calculation.address_object_constractions %></p>
+            <p>Статус расчета: <%= calculation.status %></p>
         </div>
     </div>
 
     <!-- Заголовок "Расчет" и кнопка "Статус" -->
     <div class="header-center">
         <h1>Расчет</h1>
-        <div id="status-div" class="">
-            <button type="button" class="btn btn-primary" id="statusButton" onclick="changeBtn('<%= calculation.status%>')"><%= calculation.status%></button>
-        </div>
-        <div id="document-div" class="hidden">
+<!--        <div id="status-div" class="">-->
+<!--            <button type="button" class="btn btn-primary" id="statusButton" onclick="changeBtn('<%= calculation.status%>')"><%= calculation.status%></button>-->
+<!--        </div>-->
+        <% if (calculation.status === 'Актуален') {%>
             <button type="button" class="btn btn-primary" id="get-document-btn" >Получить договор</button>
-        </div>
-        <div id="actualize-div" class="hidden">
+        <%} else if(calculation.status === 'Заключен договор'){%>
+            <button type="button" class="btn btn-primary" id="download-document-btn" onclick="getDocument(<%= client.id%>, <%= calculation.id%>)">Скачать договор</button>
+        <%} else if(calculation.status === 'Не актуален'){%>
             <button type="button" class="btn btn-primary" id="actualize-btn" onclick="actualize()">Актуализировать</button>
-        </div>
+        <%}%>
+<!--        <div id="document-div" class="hidden">-->
+<!--            -->
+<!--        </div>-->
+<!--        <div id="document-get-div" class="hidden">-->
+<!--            -->
+<!--        </div>-->
+<!--        <div id="actualize-div" class="hidden">-->
+<!--            -->
+<!--        </div>-->
 
 
 

@@ -79,19 +79,28 @@ function changeBtn(calculationStatus){
     const docButton = document.getElementById("document-div");
     const statusButton = document.getElementById("status-div");
     const actualizeButton = document.getElementById("actualize-div");
+    const documentGet = document.getElementById("document-get-div");
 
     if (calculationStatus === "Не актуален") {
         actualizeButton.classList.remove("hidden");
     } else if (calculationStatus === "Актуален") {
         docButton.classList.remove("hidden");
+    } else if (calculationStatus === "Заключен договор") {
+        documentGet.classList.remove("hidden");
     }
     statusButton.classList.add("hidden");
 }
 async function getDocument(clientId, calculationId) {
     try{
+        const button = event.target;
+        button.disabled = true;
+        button.innerHTML = 'Создание договора...';
         const response = await fetch(`/api/result/getDocument/${clientId}/${calculationId}`);
         if (!response.ok) {
             throw new Error('Ошибка при получении файла');
+        } else {
+            button.disabled = false;
+            button.innerHTML = 'Скачать договор';
         }
 
         const blob = await response.blob();
