@@ -480,7 +480,8 @@ function onLoadCarcas(floorsDBData) {
         });
     });
 
-    console.log(loadFloorsFromLocalStorage())
+    //console.log(loadFloorsFromLocalStorage())
+    console.log(floorsDBData);
     if(floorsDBData !== null && floorsDBData.length > 0) {
         loadFloorsSavedToDB(floorsDBData, false);
     } else if (localStorage.getItem('floorsData') !== null) {

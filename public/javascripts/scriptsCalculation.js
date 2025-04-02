@@ -50,6 +50,7 @@ function onClickEdit(){
     const currentUrl = window.location.href; // Текущий URL
     const newUrl = currentUrl.replace(/\/result$/, ""); // Убираем `/carcas/result`
     window.location.href = newUrl; // Перенаправляем пользователя
+    localStorage.removeItem("floorsData");
 }
 
 async function actualize(){
@@ -117,7 +118,7 @@ async function getDocument(clientId, calculationId) {
     }
 
 }
-function OnClickEdit(){
+function OnClickEditClient(){
     const lastName = document.getElementById("lastName");
     const firstName = document.getElementById("firstName");
     const middleName = document.getElementById("middleName");

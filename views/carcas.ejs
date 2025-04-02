@@ -10,7 +10,6 @@
     <link rel="icon" href="/images/LogoWhite.png" type="image/png">
     <title>Каркас</title>
     <script>
-
         const floorsDBData = <%- JSON.stringify(floorsData) %>;
         const insulation = <%- JSON.stringify(insulation) %>;
     </script>
@@ -26,6 +25,9 @@
             <p><strong>Адрес:</strong> <%= client.adress %></p>
             <p><strong>Телефон:</strong> <%= client.phone %></p>
         </div>
+        <div class="exit">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть" onclick="goBack()"></button>
+        </div>
     </div>
 
     <!-- Блок с действиями (стрелка) -->
@@ -37,16 +39,23 @@
     <h1>Каркас</h1>
 
     <!-- Блок с именем и должностью -->
-    <div class="info">
-        <p id="name"></p>
-        <p id="user-status"></p>
+    <div class="info-exit">
+
+        <div class="info">
+            <p id="name"></p>
+            <p id="user-status"></p>
+        </div>
     </div>
+
 </div>
 
 <!-- Поле для ввода адреса и кнопки -->
 <div class="address-input-container">
     <input type="text" class="form-control" id="addressInput" placeholder="Добавить адрес объекта строительства" value="<%= calculation === undefined ? '' : calculation.address_object_constractions%>">
-    <button type="button" class="btn btn-success" id="saveAddressButton" onclick="saveAddress()">Сохранить</button>
+
+    <%  if (floorsData.length > 0){%>
+        <button type="button" class="btn btn-success" id="saveAddressButton" onclick="saveAddress()">Сохранить</button>
+    <%}%>
     <button type="button" class="btn btn-danger" id="clearCalculationButton" onclick="clearCalculation()">Очистить расчет</button>
 </div>
 

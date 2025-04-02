@@ -21,6 +21,9 @@
             <p><strong>Адрес:</strong> <%= client.adress %></p>
             <p><strong>Телефон:</strong> <%= client.phone %></p>
         </div>
+        <div class="exit">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть" onclick="goBack()"></button>
+        </div>
     </div>
 
     <!-- Стрелка и информация о дате и адресе -->
@@ -36,9 +39,6 @@
     <!-- Заголовок "Расчет" и кнопка "Статус" -->
     <div class="header-center">
         <h1>Расчет</h1>
-<!--        <div id="status-div" class="">-->
-<!--            <button type="button" class="btn btn-primary" id="statusButton" onclick="changeBtn('<%= calculation.status%>')"><%= calculation.status%></button>-->
-<!--        </div>-->
         <% if (calculation.status === 'Актуален') {%>
             <button type="button" class="btn btn-primary" id="get-document-btn" >Получить договор</button>
         <%} else if(calculation.status === 'Заключен договор'){%>
@@ -46,18 +46,6 @@
         <%} else if(calculation.status === 'Не актуален'){%>
             <button type="button" class="btn btn-primary" id="actualize-btn" onclick="actualize()">Актуализировать</button>
         <%}%>
-<!--        <div id="document-div" class="hidden">-->
-<!--            -->
-<!--        </div>-->
-<!--        <div id="document-get-div" class="hidden">-->
-<!--            -->
-<!--        </div>-->
-<!--        <div id="actualize-div" class="hidden">-->
-<!--            -->
-<!--        </div>-->
-
-
-
     </div>
 
     <!-- Блок с именем и должностью -->
@@ -172,7 +160,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                 <button type="button" class="btn btn-primary hidden" onclick="OnClickSaveEditClient(<%= client.id%>)" id="save-client-btn">Сохранить</button>
-                <button type="button" class="btn btn-warning" onclick="OnClickEdit()">Редактировать</button>
+                <button type="button" class="btn btn-warning" onclick="OnClickEditClient()">Редактировать</button>
             </div>
         </div>
     </div>
