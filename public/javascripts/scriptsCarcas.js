@@ -484,7 +484,7 @@ function onLoadCarcas(floorsDBData) {
     if(floorsDBData !== null && floorsDBData.length > 0) {
         loadFloorsSavedToDB(floorsDBData, false);
     } else if (localStorage.getItem('floorsData') !== null) {
-        loadFloorsSavedToDB(loadFloorsFromLocalStorage())
+        loadFloorsSavedToDB(loadFloorsFromLocalStorage().floors)
     }
 
     //onFloorCountChange()
