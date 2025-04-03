@@ -6,8 +6,9 @@ function setupAutoSave() {
     document.querySelectorAll("input, select").forEach((element) => {
         element.addEventListener("input", () => {
             const floorsData = collectFormData();
-            saveFloorsToLocalStorage(floorsData);
-            console.log('saved');
+            if (floorsData) {
+                saveFloorsToLocalStorage(floorsData);
+            }
         });
     });
 }
@@ -730,4 +731,46 @@ async function calculateAndSave(clientId) {
     //     console.error('Ошибка отправки данных:', error);
     //     alert('Произошла ошибка при отправке данных');
     // });
+}
+
+// Функции валидации
+function validateNumericInput(input, allowDecimal = true) {
+    let value = input.value;
+    let newValue = value.replace(/[^\d.]/g, '');
+
+    if (!allowDecimal) {
+        newValue = newValue.replace(/\./g, '');
+    } else {
+        const dotIndex = newValue.indexOf('.');
+        if (dotIndex !== -1) {
+            newValue = newValue.substring(0, dotIndex + 1) +
+                newValue.substring(dotIndex + 1).replace(/\./g, '');
+        }
+    }
+
+    input.value = newValue;
+}
+
+function validateIntegerInput(input) {
+    validateNumericInput(input, false);
+}
+
+function showError(inputId, message) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(`${inputId}-error`);
+
+    if (input && error) {
+        input.classList.add('is-invalid');
+        error.textContent = message;
+    }
+}
+
+function resetErrors() {
+    document.querySelectorAll('.is-invalid').forEach(el => {
+        el.classList.remove('is-invalid');
+    });
+
+    document.querySelectorAll('.invalid-feedback').forEach(el => {
+        el.textContent = '';
+    });
 }

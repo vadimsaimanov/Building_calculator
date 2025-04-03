@@ -85,7 +85,7 @@ function validateSaveClient() {
         showError('email', 'Пожалуйста, введите email');
         isValid = false;
     } else if (!validateEmail(email)) {
-        showError('email', 'Пожалуйста, введите корректный email');
+        showError('email', 'Пожалуйста, введите корректный email (только латинские символы)');
         isValid = false;
     }
 
@@ -97,9 +97,8 @@ function validateSaveClient() {
 
     return {isValid, data: {lastName, firstName, middleName, cleanPhone, email, address}};
 }
+
 async function OnClickSaveClient() {
-
-
     const valid = validateSaveClient();
     const isValid = valid.isValid;
     const dataValid = valid.data;
@@ -108,7 +107,32 @@ async function OnClickSaveClient() {
     if (!isValid) {
         return;
     }
+
     try {
+        // Проверка на существующий телефон и email
+        const checkResponse = await fetch('/client/check-exists', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                phone: dataValid.cleanPhone,
+                email: dataValid.email
+            })
+        });
+
+        const checkData = await checkResponse.json();
+
+        if (checkData.exists) {
+            if (checkData.field === 'phone') {
+                showError('phone', 'Клиент с таким телефоном уже существует');
+            } else if (checkData.field === 'email') {
+                showError('email', 'Клиент с таким email уже существует');
+            }
+            return;
+        }
+
+        // Если проверка пройдена, создаем клиента
         const response = await fetch('/client/add', {
             method: 'POST',
             headers: {
@@ -150,10 +174,17 @@ function showError(fieldId, message) {
 }
 
 function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Проверка на кириллицу и другие недопустимые символы
+    if (/[а-яА-Я]/.test(email)) {
+        return false;
+    }
+
+    // Стандартная проверка формата email
+    const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     return re.test(String(email).toLowerCase());
 }
 
+// Остальные функции остаются без изменений
 function goBack() {
     if (window.location.pathname.includes('/client/') || window.location.pathname.includes('/carcas')) {
         const clientId = window.location.pathname.split('/')[2];

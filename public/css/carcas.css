@@ -251,3 +251,108 @@ h1 {
 .is-invalid ~ .invalid-feedback {
     display: block;
 }
+/* Добавляем в конец файла стилей */
+
+/* Стили для групп окон и дверей */
+.window-group, .door-group {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* Стили для кнопок удаления */
+.delete-btn {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Улучшаем отступы в формах */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Стили для невалидных полей */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .window-group, .door-group {
+        padding: 10px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-control {
+        width: 100% !important;
+    }
+}
+/* Стили для групп окон и дверей */
+.window-group, .door-group {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+/* Стили для кнопок удаления */
+.delete-btn {
+    margin-top: 15px;
+    padding: 8px 15px;
+    width: auto;
+    display: inline-block;
+}
+
+/* Улучшенные отступы в формах */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Стили для невалидных полей */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .window-group, .door-group {
+        padding: 10px;
+    }
+
+    .delete-btn {
+        margin-top: 10px;
+    }
+}
