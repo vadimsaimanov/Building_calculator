@@ -8,6 +8,7 @@
     box-sizing: border-box;
     background-color: #fff;
     position: relative;
+    min-height: 120px; /* Устанавливаем как в client.css */
 }
 
 /* Контейнер для логотипа и информации о клиенте */
@@ -57,21 +58,32 @@ h1 {
     margin: 0;
 }
 
-/* Блок с именем и должностью */
-.info {
-    text-align: right;
+.exit {
     position: absolute;
-    top: 70px;
-    right: 60px;
+    top: 10px; /* Как в client.css */
+    right: 10px; /* Как в client.css */
+    z-index: 10; /* Устанавливаем выше других элементов */
+}
+
+.info {
+    position: absolute;
+    top: 70px; /* Как в client.css */
+    right: 60px; /* Как в client.css */
+    text-align: right;
+    min-width: 150px; /* Как в client.css */
+    max-width: 300px; /* Как в client.css */
+    white-space: normal; /* Как в client.css */
+    word-wrap: break-word; /* Как в client.css */
 }
 
 .info p {
     margin: 0;
     font-size: 14px;
+    line-height: 1.2; /* Как в client.css */
 }
 
 .info p:first-child {
-    margin-bottom: 5px;
+    margin-bottom: 5px; /* Как в client.css */
 }
 
 /* Стили для блока с действиями (стрелка) */

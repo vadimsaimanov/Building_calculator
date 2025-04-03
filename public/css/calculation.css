@@ -2,13 +2,14 @@
 .header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Выравнивание по верхнему краю */
+    align-items: flex-start;
     width: 100%;
     padding: 10px 20px;
     box-sizing: border-box;
     background-color: #fff;
     position: relative;
-    flex-wrap: wrap; /* Добавлено для адаптивности */
+    min-height: 120px; /* Как в client.css */
+    flex-wrap: wrap;
 }
 .hidden {
     display: none !important;
@@ -16,8 +17,8 @@
 /* Контейнер для логотипа и информации о клиенте */
 .logo-and-client-info {
     display: flex;
-    align-items: flex-start; /* Выравнивание по верхнему краю */
-    gap: 20px; /* Отступ между логотипом и информацией о клиенте */
+    align-items: flex-start;
+    gap: 20px;
     width: 100%;
 }
 
@@ -49,6 +50,12 @@
     font-size: 14px;
 }
 
+.exit {
+    position: absolute;
+    top: 10px; /* Как в client.css */
+    right: 10px; /* Как в client.css */
+    z-index: 10; /* Устанавливаем выше других элементов */
+}
 .client-info strong {
     font-weight: bold;
 }
@@ -101,15 +108,20 @@ h1 {
 
 /* Блок с именем и должностью */
 .info {
+    position: absolute;
+    top: 70px; /* Как в client.css */
+    right: 60px; /* Как в client.css */
     text-align: right;
-    position: absolute; /* Абсолютное позиционирование */
-    top: 75px; /* Отступ сверху (регулируйте по необходимости) */
-    right: 70px; /* Отступ справа */
+    min-width: 150px; /* Как в client.css */
+    max-width: 300px; /* Как в client.css */
+    white-space: normal; /* Как в client.css */
+    word-wrap: break-word; /* Как в client.css */
 }
 
 .info p {
     margin: 0;
     font-size: 14px;
+    line-height: 1.2; /* Как в client.css */
 }
 
 .info p:first-child {

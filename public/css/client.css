@@ -1,15 +1,16 @@
 /* Обертка для всей шапки сайта */
 .header {
-    display: flex;               /* Включаем Flexbox */
-    /*align-items: center;         !* Выравниваем элементы по вертикальной оси *!*/
-    justify-content: space-between; /* Размещаем элементы по краям */
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
     background-color: #fff;
-    position: relative; /* Добавляем position: relative для абсолютного позиционирования заголовка */
+    position: relative; /* Основа для абсолютного позиционирования */
+    min-height: 120px; /* Устанавливаем высоту для размещения элементов */
 }
-.header-center{
+
+.header-center {
     align-items: center;
     display: flex;
 }
@@ -20,9 +21,9 @@
 
 /* Контейнер для логотипа и блока с действиями */
 .logo-and-actions {
-    display: flex;               /* Включаем Flexbox */
-    flex-direction: column;      /* Расположение элементов вертикально */
-    align-items: flex-start;     /* Выравнивание по левой стороне */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 /* Логотип */
@@ -39,93 +40,115 @@
 }
 
 h1 {
-    margin: 0;                  /* Убираем внешний отступ */
-    text-align: center;         /* Центрирование текста внутри заголовка */
-    position: absolute;         /* Абсолютное позиционирование */
-    left: 50%;                 /* Центрирование по горизонтали */
-    transform: translateX(-50%); /* Сдвиг на 50% влево для точного центрирования */
+    margin: 0;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Контейнер для кнопки закрытия и информации */
+.info-exit {
+    position: static; /* Убираем влияние на дочерние элементы */
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    height: auto; /* Убираем фиксированную высоту */
+}
+
+/* Кнопка закрытия */
+.exit {
+    position: absolute;
+    top: 10px; /* Фиксируем в правом верхнем углу */
+    right: 10px; /* Фиксируем в правом верхнем углу */
+    z-index: 10; /* Устанавливаем выше других элементов */
+}
+
+/* Вспомогательный контейнер для .info */
+.info-div {
+    position: static; /* Убираем влияние на дочерние элементы */
 }
 
 /* Блок с информацией (Имя + Должность) */
 .info {
-    height: 100%;
-    text-align: right;          /* Выравниваем текст по правому краю */
-    margin-left: auto;          /* Отодвигает блок с информацией вправо */
-}
-.info-div{
-    height: 100%;
-    text-align: center;
-}
-.info-exit{
-    justify-content: space-between;
-    height: 100%;
+    position: absolute;
+    top: 70px; /* Как на других страницах */
+    right: 60px; /* Как на других страницах */
     text-align: right;
+    min-width: 150px; /* Минимальная ширина для предотвращения обрезки текста */
+    max-width: 300px; /* Ограничение ширины для контроля переносов */
+    white-space: normal; /* Разрешаем перенос текста */
+    word-wrap: break-word; /* Перенос длинных слов */
+}
+
+.info p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.2; /* Улучшаем читаемость при переносе */
+}
+
+.info p:first-child {
+    margin-bottom: 5px;
 }
 
 /* Стилизации для блока с действиями */
 .actions {
-    display: flex;              /* Включаем Flexbox для кнопок и иконки */
-    flex-direction: column;     /* Расположение элементов вертикально */
-    align-items: flex-start;    /* Выравнивание по левой стороне */
-    margin-top: 10px;           /* Отступ сверху для отделения от логотипа */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
 }
 
 /* Иконка стрелки */
 .bi-arrow-left {
-    font-size: 25px;            /* Увеличенный размер иконки */
-    cursor: pointer;            /* Указатель мыши при наведении */
-    margin-bottom: 10px;        /* Отступ снизу для отделения от кнопки */
+    font-size: 25px;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .bi-arrow-left:hover {
-    color: #0056b3; /* Изменение цвета при наведении */
+    color: #0056b3;
 }
 
 /* Кнопка */
 .btn-warning {
-    padding: 8px 16px;          /* Добавляем отступы внутри кнопки */
-    border-radius: 4px;         /* Скругление углов кнопки */
-    cursor: pointer;            /* Указатель мыши при наведении */
-}
-
-/* Абзацы внутри блока .info */
-.info p {
-    margin-top: 3px;
-    margin-right: 75px;
-    margin-bottom: 2px;
-    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 /* Стили для сетки карточек клиентов */
 .client-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 колонки */
-    gap: 20px; /* Отступ между карточками */
-    padding: 20px; /* Отступы вокруг сетки */
-    align-items: stretch; /* Растягиваем карточки на всю высоту строки */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    align-items: stretch;
 }
 
 /* Стили для карточки клиента */
 .client-card {
-    background-color: #ffffff; /* Белый фон */
-    border: 1px solid #ddd; /* Граница */
-    border-radius: 8px; /* Скругление углов */
-    padding: 20px; /* Внутренние отступы */
-    text-align: center; /* Текст по центру */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень */
-    cursor: pointer; /* Указатель при наведении */
-    transition: transform 0.2s, box-shadow 0.2s; /* Анимация */
-    min-height: 100px; /* Фиксированная минимальная высота */
-    display: flex; /* Используем Flexbox для выравнивания содержимого */
-    align-items: center; /* Выравниваем содержимое по центру вертикально */
-    justify-content: center; /* Выравниваем содержимое по центру горизонтально */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Эффект при наведении на карточку */
 .client-card:hover {
-    transform: translateY(-5px); /* Сдвиг вверх */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 /* Стили для ошибок в форме */
 .invalid-feedback {
     color: #dc3545;
@@ -145,4 +168,37 @@ h1 {
 .modal-footer {
     border-top: none;
     padding-top: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-exit {
+        width: 100%;
+        display: block; /* Упрощаем структуру для адаптивности */
+    }
+
+    .exit {
+        position: static;
+        margin-top: 10px;
+        text-align: right;
+    }
+
+    .info {
+        position: static;
+        text-align: left;
+        margin-top: 10px;
+        min-width: 0; /* Убираем минимальную ширину для адаптивности */
+        max-width: 100%; /* Позволяем тексту занимать всю ширину */
+    }
+
+    .header-center {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+    }
 }

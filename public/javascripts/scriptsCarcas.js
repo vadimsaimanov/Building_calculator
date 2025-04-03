@@ -81,17 +81,17 @@ function updateFloors(count) {
         <h2>Этаж ${i + 1}</h2>
         <div class="form-group">
             <label for="floorHeight-${i}">Высота этажа</label>
-            <input type="text" class="form-control" id="floorHeight-${i}" value="3" placeholder="Введите высоту">
+            <input type="text" class="form-control" id="floorHeight-${i}" value="" placeholder="Введите высоту">
             <span class="unit">м</span>
         </div>
         <div class="form-group">
             <label for="wallPerimeter-${i}">Периметр внешних стен</label>
-            <input type="text" class="form-control" id="wallPerimeter-${i}" value="30" placeholder="Введите периметр">
+            <input type="text" class="form-control" id="wallPerimeter-${i}" value="" placeholder="Введите периметр">
             <span class="unit">м</span>
         </div>
         <div class="form-group">
             <label for="baseArea-${i}">Площадь основания</label>
-            <input type="text" class="form-control" id="baseArea-${i}" value="56" placeholder="Введите площадь">
+            <input type="text" class="form-control" id="baseArea-${i}" value="" placeholder="Введите площадь">
             <span class="unit">м²</span>
         </div>
         <div class="form-group">
@@ -106,7 +106,7 @@ function updateFloors(count) {
         </div>
         <div class="form-group">
             <label for="innerWallLength-${i}">Длина внутренних стен</label>
-            <input type="text" class="form-control" id="innerWallLength-${i}" value="15" placeholder="Введите длину">
+            <input type="text" class="form-control" id="innerWallLength-${i}" value="" placeholder="Введите длину">
             <span class="unit">м</span>
         </div>
         <div class="form-group">
