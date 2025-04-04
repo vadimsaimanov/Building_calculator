@@ -107,36 +107,10 @@ h1 {
     color: #0056b3;
 }
 
-/* Стили для контейнера с полем ввода адреса и кнопками */
-.address-input-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Центрируем по горизонтали */
-    padding: 20px;
-    gap: 10px;
-}
 
-.address-input-container .form-control {
-    width: 300px; /* Уменьшаем ширину полей ввода */
-    padding: 5px;
-    font-size: 14px;
-}
 
-.address-input-container .btn {
-    padding: 5px 10px;
-    font-size: 14px;
-    border-radius: 4px;
-}
 
-.address-input-container .btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-}
 
-.address-input-container .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
 
 /* Основные стили для контейнера с исходными данными */
 .source-data-container {
@@ -453,4 +427,169 @@ label[required]::after {
     .invalid-feedback {
         font-size: 0.75em;
     }
+}
+/* Общие стили для формы */
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+/* Стили для обязательных полей */
+label[required]::after {
+    content: " *";
+    color: #dc3545;
+}
+
+/* Стили для групп */
+.window-group, .door-group {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+/* Кнопки удаления */
+.delete-btn {
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Ошибки */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 5px;
+    display: none;
+}
+
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .delete-btn {
+        width: 100%;
+    }
+}
+
+/* Стили для валидации */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Подсветка обязательных полей */
+.required-field::after {
+    content: " *";
+    color: #dc3545;
+}
+
+/* Стили для групп с ошибками */
+.has-error {
+    border-left: 3px solid #dc3545;
+    padding-left: 10px;
+}
+
+/* Адаптивные стили для сообщений об ошибках */
+@media (max-width: 768px) {
+    .invalid-feedback {
+        font-size: 0.75em;
+    }
+}
+
+/* Стили для контейнера адреса */
+.address-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.address-input-container .form-control {
+    width: 300px; /* Возвращаем прежний размер */
+    padding: 5px;
+    font-size: 14px;
+}
+
+/* Стили для кнопок в контейнере адреса */
+.address-input-container .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Стили для сообщения об ошибке */
+#addressInput-error {
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* Убедитесь, что кнопки остаются на своих местах */
+.address-input-container .btn {
+    order: 2; /* Кнопки должны быть после поля ввода и сообщения об ошибке */
+}
+
+/* Стили для контейнера адреса */
+.address-input-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: flex-start; /* Выравнивание по верхней границе */
+    padding: 20px;
+    text-align: center;
+}
+
+.address-input-container .form-control {
+    width: 300px; /* Возвращаем прежний размер */
+    padding: 5px;
+    font-size: 14px;
+}
+
+/* Стили для кнопок в контейнере адреса */
+.address-input-container .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    align-self: flex-start; /* Убедитесь, что кнопки находятся на одной линии с полем ввода */
+}
+
+/* Стили для сообщения об ошибке */
+#addressInput-error {
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    order: 3; /* Убедитесь, что сообщение об ошибке всегда находится внизу */
 }

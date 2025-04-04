@@ -46,11 +46,18 @@ function validateNumericField(input, value) {
 
     if (!/^\d*\.?\d+$/.test(value)) {
         showError(input.id, 'Введите корректное число');
-    } else if (parseFloat(value) <= 0) {
-        showError(input.id, 'Значение должно быть больше 0');
-    } else if (parseFloat(value) > 1000) {
-        showError(input.id, 'Значение слишком большое');
-        input.value = '1000';
+    } else {
+        const numValue = parseFloat(value);
+
+        if (numValue <= 0) {
+            showError(input.id, 'Значение должно быть больше 0');
+        } else if (input.id.includes('Height') && numValue > 3) {
+            showError(input.id, 'Максимальная высота этажа - 3 м');
+            input.value = '3'; // Автоматически исправляем значение
+        } else if (numValue > 1000) {
+            showError(input.id, 'Значение слишком большое');
+            input.value = '1000';
+        }
     }
 }
 
@@ -248,7 +255,8 @@ function getFloorHtml(floorIndex) {
     <div class="form-group">
         <label for="floorHeight-${floorIndex}">Высота этажа</label>
         <input type="text" class="form-control" id="floorHeight-${floorIndex}" 
-               placeholder="Введите высоту" oninput="validateNumericInput(this, true, 10)">
+               placeholder="Введите высоту (макс. 3 м)" 
+               oninput="validateNumericInput(this, true, 3)">
         <span class="unit">м</span>
         <div class="invalid-feedback" id="floorHeight-${floorIndex}-error"></div>
     </div>
@@ -974,10 +982,16 @@ async function calculateAndSave(clientId) {
         const response = await fetch('saveCarcasData', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify(data)
         });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Server error');
+        }
 
         const result = await response.json();
 
@@ -985,11 +999,11 @@ async function calculateAndSave(clientId) {
             alert('Данные сохранены успешно!');
             window.location.href = `/client/${clientId}/${result.calculationId}/carcas/result`;
         } else {
-            alert('Ошибка при сохранении: ' + result.message);
+            alert(result.message || 'Ошибка при сохранении');
         }
     } catch (error) {
-        console.error('Ошибка сети:', error);
-        alert('Произошла ошибка при отправке данных');
+        console.error('Ошибка:', error);
+        alert(`Ошибка сохранения: ${error.message || 'Проверьте введенные данные'}`);
     }
 }
 
@@ -1140,4 +1154,8 @@ function validateDoorGroups(floorIndex, type) {
     });
 
     return isValid;
+}
+// В файле sw.js или в основном скрипте
+if ('serviceWorker' in navigator && !window.location.hostname.includes('localhost')) {
+    navigator.serviceWorker.register('/sw.js');
 }

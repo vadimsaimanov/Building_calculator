@@ -40,19 +40,17 @@
 
     <!-- Блок с именем и должностью -->
     <div class="info-exit">
-
         <div class="info">
             <p id="name"></p>
             <p id="user-status"></p>
         </div>
     </div>
-
 </div>
 
 <!-- Поле для ввода адреса и кнопки -->
 <div class="address-input-container">
     <input type="text" class="form-control" id="addressInput" placeholder="Добавить адрес объекта строительства" value="<%= calculation === undefined ? '' : calculation.address_object_constractions%>">
-
+    <div id="addressInput-error" class="invalid-feedback"></div>
     <%  if (floorsData.length > 0){%>
         <button type="button" class="btn btn-success" id="saveAddressButton" onclick="saveAddress()">Сохранить</button>
     <%}%>
@@ -73,17 +71,13 @@
     </div>
     <br>
     <h4 id="floorHeader"></h4>
-    <div id="floors-container">
-
-    </div>
+    <div id="floors-container"></div>
     <br>
-
 
     <!-- Кнопка Рассчитать -->
     <div class="calculation-btn-div hidden" id="calculation-div">
         <button type="button" class="btn btn-primary" onclick="calculateAndSave(<%= client.id %>)" id="calculate-btn">Сохранить и рассчитать</button>
     </div>
-
 </div>
 </body>
 </html>
