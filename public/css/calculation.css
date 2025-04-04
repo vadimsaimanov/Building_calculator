@@ -37,9 +37,31 @@
 
 /* Блок с информацией о клиенте */
 .client-info {
+
     text-align: left;
     flex: 1;
+
 }
+.client-box {
+    width: 300px;
+    box-shadow: 0 10px 12px rgba(0, 0, 0, 0.2);
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: box-shadow 0.3s, background-color 0.3s, transform 0.2s;
+    cursor: pointer; /* курсор как указатель */
+}
+
+/* При наведении */
+.client-box:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Эффект при клике */
+.client-box:active {
+    transform: scale(0.98);
+}
+
 
 .address-info {
     line-height: 10px;

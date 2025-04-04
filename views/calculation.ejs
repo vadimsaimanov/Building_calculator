@@ -17,9 +17,11 @@
     <div class="logo-and-client-info">
         <img id="logo" src="/images/Logo.png" alt="Logo">
         <div class="client-info">
-            <p><strong>Клиент:</strong> <%= client.last_name %> <%= client.first_name %> <%= client.second_name %></p>
-            <p><strong>Адрес:</strong> <%= client.adress %></p>
-            <p><strong>Телефон:</strong> <%= client.phone %></p>
+            <div class="client-box">
+                <p><strong>Клиент:</strong> <%= client.last_name %> <%= client.first_name %> <%= client.second_name %></p>
+                <p><strong>Адрес:</strong> <%= client.adress %></p>
+                <p><strong>Телефон:</strong> <%= client.phone %></p>
+            </div>
         </div>
         <div class="exit">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть" onclick="goBack()"></button>
