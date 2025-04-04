@@ -40,7 +40,7 @@
     <div class="header-center">
         <h1>Расчет</h1>
         <% if (calculation.status === 'Актуален') {%>
-            <button type="button" class="btn btn-primary" id="get-document-btn" >Получить договор</button>
+            <button type="button" class="btn btn-primary" id="get-document-btn" onclick="onClickGetDocument()">Получить договор</button>
         <%} else if(calculation.status === 'Заключен договор'){%>
             <button type="button" class="btn btn-primary" id="download-document-btn" onclick="getDocument(<%= client.id%>, <%= calculation.id%>)">Скачать договор</button>
         <%} else if(calculation.status === 'Не актуален'){%>
@@ -133,30 +133,37 @@
                 <form>
                     <div class="mb-3">
                         <label for="lastName" class="form-label">Фамилия</label>
-                        <input type="text" class="form-control readonly" id="lastName" placeholder="Введите фамилию" value="<%=client.last_name%>" readonly>
+                        <input type="text" class="form-control readonly" id="lastName" placeholder="Введите фамилию" value="<%=client.last_name%>" readonly required>
+                        <div class="invalid-feedback" id="lastName-error"></div>
                     </div>
                     <div class="mb-3">
                         <label for="firstName" class="form-label">Имя</label>
-                        <input type="text" class="form-control readonly" id="firstName" placeholder="Введите имя" value="<%=client.first_name%>" readonly>
+                        <input type="text" class="form-control readonly" id="firstName" placeholder="Введите имя" value="<%=client.first_name%>" readonly required>
+                        <div class="invalid-feedback" id="firstName-error"></div>
                     </div>
                     <div class="mb-3">
                         <label for="middleName" class="form-label">Отчество</label>
                         <input type="text" class="form-control readonly" id="middleName" placeholder="Введите отчество" value="<%=client.second_name%>" readonly>
+                        <div class="invalid-feedback" id="middleName-error"></div>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Телефон</label>
-                        <input type="tel" class="form-control readonly" id="phone" placeholder="Введите телефон" value="<%=client.phone%>" readonly>
+                        <input type="tel" class="form-control readonly" id="phone" placeholder="Введите телефон" value="<%=client.phone%>" readonly required>
+                        <div class="invalid-feedback" id="phone-error"></div>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control readonly" id="email" placeholder="Введите email" value="<%=client.email%>" readonly>
+                        <input type="email" class="form-control readonly" id="email" placeholder="Введите email" value="<%=client.email%>" readonly required>
+                        <div class="invalid-feedback" id="email-error"></div>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Адрес</label>
                         <input type="text" class="form-control readonly" id="address" placeholder="Введите адрес" value="<%=client.adress%>" readonly>
+                        <div class="invalid-feedback" id="address-error"></div>
                     </div>
                 </form>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                 <button type="button" class="btn btn-primary hidden" onclick="OnClickSaveEditClient(<%= client.id%>)" id="save-client-btn">Сохранить</button>

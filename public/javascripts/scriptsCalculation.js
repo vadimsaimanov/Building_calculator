@@ -136,15 +136,138 @@ function OnClickEditClient(){
     })
 
 }
+function validateSaveClient() {
+    const lastName = document.getElementById('lastName').value.trim();
+    const firstName = document.getElementById('firstName').value.trim();
+    const middleName = document.getElementById('middleName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const address = document.getElementById('address').value.trim();
+
+    resetClientForm();
+
+    let isValid = true;
+
+    // Валидация фамилии
+    if (!lastName) {
+        showError('lastName', 'Пожалуйста, введите фамилию');
+        isValid = false;
+    } else if (lastName.length < 2 || lastName.length > 50) {
+        showError('lastName', 'Фамилия должна быть от 2 до 50 символов');
+        isValid = false;
+    } else if (/[0-9!@#$%^&*()_+=\[\]{};':"\\|,.<>\/?]/.test(lastName.replace(/-/g, ''))) {
+        showError('lastName', 'Фамилия содержит недопустимые символы');
+        isValid = false;
+    }
+
+    // Валидация имени
+    if (!firstName) {
+        showError('firstName', 'Пожалуйста, введите имя');
+        isValid = false;
+    } else if (firstName.length < 2 || firstName.length > 50) {
+        showError('firstName', 'Имя должно быть от 2 до 50 символов');
+        isValid = false;
+    } else if (/[0-9!@#$%^&*()_+=\[\]{};':"\\|,.<>\/?]/.test(firstName.replace(/-/g, ''))) {
+        showError('firstName', 'Имя содержит недопустимые символы');
+        isValid = false;
+    }
+
+    // Валидация отчества
+    if (!middleName) {
+        showError('middleName', 'Пожалуйста, введите отчество');
+        isValid = false;
+    } else if (middleName.length < 2 || middleName.length > 50) {
+        showError('middleName', 'Отчество должно быть от 2 до 50 символов');
+        isValid = false;
+    } else if (/[0-9!@#$%^&*()_+=\[\]{};':"\\|,.<>\/?]/.test(middleName.replace(/-/g, ''))) {
+        showError('middleName', 'Отчество содержит недопустимые символы');
+        isValid = false;
+    }
+
+    // Валидация телефона
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (!phone) {
+        showError('phone', 'Пожалуйста, введите телефон');
+        isValid = false;
+    } else if (cleanPhone.length < 10 || cleanPhone.length > 15) {
+        showError('phone', 'Телефон должен содержать от 10 до 15 цифр');
+        isValid = false;
+    } else if (!/^[\d\s\-\+\(\)]+$/.test(phone)) {
+        showError('phone', 'Телефон содержит недопустимые символы');
+        isValid = false;
+    }
+
+    // Валидация email
+    if (!email) {
+        showError('email', 'Пожалуйста, введите email');
+        isValid = false;
+    } else if (!validateEmail(email)) {
+        showError('email', 'Пожалуйста, введите корректный email (только латинские символы)');
+        isValid = false;
+    }
+
+    // Валидация адреса
+    if (!address) {
+        showError('address', 'Пожалуйста, введите адрес');
+        isValid = false;
+    }
+
+    return {isValid, data: {lastName, firstName, middleName, cleanPhone, email, address}};
+}
+function showError(fieldId, message) {
+    const input = document.getElementById(fieldId);
+    const error = document.getElementById(`${fieldId}-error`);
+
+    if (input && error) {
+        input.classList.add('is-invalid');
+        error.textContent = message;
+    }
+}
+
+function validateEmail(email) {
+    // Проверка на кириллицу и другие недопустимые символы
+    if (/[а-яА-Я]/.test(email)) {
+        return false;
+    }
+
+    // Стандартная проверка формата email
+    const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    return re.test(String(email).toLowerCase());
+}
 async function OnClickSaveEditClient(clientId) {
     const valid = validateSaveClient();
     const dataValid = valid.data;
+    console.log(valid);
     const user = JSON.parse(localStorage.getItem("user"));
     if (!valid.isValid) {
         return;
     }
 
     try {
+        const checkResponse = await fetch('/client/check-exists', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                clientId: clientId,
+                phone: dataValid.cleanPhone,
+                email: dataValid.email
+            })
+        });
+
+        const checkData = await checkResponse.json();
+
+        console.log(checkData);
+        if (checkData.exists) {
+            if (checkData.field === 'phone') {
+                showError('phone', 'Клиент с таким телефоном уже существует');
+            } else if (checkData.field === 'email') {
+                showError('email', 'Клиент с таким email уже существует');
+            }
+            return;
+        }
+
         const response = await fetch(`/client/${clientId}/update`, {
             method: 'POST',
             headers: {
@@ -171,6 +294,17 @@ async function OnClickSaveEditClient(clientId) {
     } catch (error) {
         alert('Ошибка сети: ' + error.message);
     }
+}
+function resetClientForm() {
+    const fields = ['lastName', 'firstName', 'middleName', 'phone', 'email', 'address'];
+    fields.forEach(field => {
+        const input = document.getElementById(field);
+        const error = document.getElementById(`${field}-error`);
+        if (input && error) {
+            input.classList.remove('is-invalid');
+            error.textContent = '';
+        }
+    });
 }
 async function documentSetStatus(clientId, calculationId){
     try{
@@ -208,12 +342,8 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault(); // Предотвращаем переход по ссылке, если это ссылка
         createClientModal.show();
     });
-
-    const getDocBtn = document.getElementById('get-document-btn');
-    const createDocumentModal = new bootstrap.Modal(document.getElementById("createDocumentModal"));
-
-    getDocBtn.addEventListener("click", function(event) {
-        event.preventDefault(); // Предотвращаем переход по ссылке, если это ссылка
-        createDocumentModal.show();
-    });
 });
+function onClickGetDocument() {
+    const createDocumentModal = new bootstrap.Modal(document.getElementById("createDocumentModal"));
+    createDocumentModal.show();
+}

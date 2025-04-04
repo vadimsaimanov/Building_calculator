@@ -116,6 +116,7 @@ async function OnClickSaveClient() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                clientId: null,
                 phone: dataValid.cleanPhone,
                 email: dataValid.email
             })
