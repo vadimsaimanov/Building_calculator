@@ -1,0 +1,220 @@
+/* Основные стили для шапки */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    position: relative;
+    min-height: 120px; /* Как в client.css */
+    flex-wrap: wrap;
+}
+.hidden {
+    display: none !important;
+}
+/* Контейнер для логотипа и информации о клиенте */
+.logo-and-client-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Стили для логотипа */
+#logo {
+    max-width: 100px;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    #logo {
+        max-width: 10%;
+    }
+}
+
+/* Блок с информацией о клиенте */
+.client-info {
+
+    text-align: left;
+    flex: 1;
+
+}
+.client-box {
+    width: 300px;
+    box-shadow: 0 10px 12px rgba(0, 0, 0, 0.2);
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: box-shadow 0.3s, background-color 0.3s, transform 0.2s;
+    cursor: pointer; /* курсор как указатель */
+}
+
+/* При наведении */
+.client-box:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Эффект при клике */
+.client-box:active {
+    transform: scale(0.98);
+}
+
+
+.address-info {
+    line-height: 10px;
+}
+
+.client-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.exit {
+    position: absolute;
+    top: 10px; /* Как в client.css */
+    right: 10px; /* Как в client.css */
+    z-index: 10; /* Устанавливаем выше других элементов */
+}
+.client-info strong {
+    font-weight: bold;
+}
+.readonly {
+    color: #999999 !important;
+}
+
+/* Блок с действиями (стрелка и информация) */
+.actions {
+    display: flex;
+    flex-direction: column; /* Столбец */
+    align-items: flex-start;
+    gap: 5px; /* Уменьшенный отступ между стрелкой и информацией */
+    margin-top: 10px; /* Отступ сверху */
+    width: 100%; /* Занимает всю ширину */
+}
+
+/* Иконка стрелки */
+.bi-arrow-left {
+    font-size: 25px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.bi-arrow-left:hover {
+    color: #0056b3;
+}
+
+/* Центральный блок с заголовком */
+.header-center {
+    position: absolute; /* Абсолютное позиционирование */
+    left: 50%; /* Центрирование по горизонтали */
+    top: 50%; /* Центрирование по вертикали */
+    transform: translate(-50%, -50%); /* Точное центрирование */
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Отступ между заголовком и кнопкой */
+}
+
+/* Заголовок "Расчет" */
+h1 {
+    margin: 0;
+    font-size: 24px; /* Увеличенный размер заголовка */
+}
+
+/* Кнопка "Статус" */
+#statusButton {
+    white-space: nowrap; /* Запрет переноса текста */
+}
+
+/* Блок с именем и должностью */
+.info {
+    position: absolute;
+    top: 70px; /* Как в client.css */
+    right: 60px; /* Как в client.css */
+    text-align: right;
+    min-width: 150px; /* Как в client.css */
+    max-width: 300px; /* Как в client.css */
+    white-space: normal; /* Как в client.css */
+    word-wrap: break-word; /* Как в client.css */
+}
+
+.info p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.2; /* Как в client.css */
+}
+
+.info p:first-child {
+    margin-bottom: 5px;
+}
+
+/* Стили для контейнера с результатом расчета */
+.result-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    background-color: #f8f9fa; /* Добавлен фон для выделения */
+    border-radius: 8px; /* Скругленные углы */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.result-container i {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.result-container .bi-pen {
+    margin-left: 10px;
+}
+
+.result-container .bi-pen:hover {
+    color: #0056b3;
+}
+
+.text-right {
+    text-align: left;
+}
+th, td {
+    min-width: 100px; /* Минимальная ширина для всех столбцов */
+}
+
+th:nth-child(1), td:nth-child(1) {
+    min-width: 50px; /* Минимальная ширина для первого столбца */
+}
+
+th:nth-child(2), td:nth-child(2) {
+    min-width: 200px; /* Минимальная ширина для второго столбца */
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .logo-and-client-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-center {
+        position: static; /* Отмена абсолютного позиционирования */
+        transform: none;
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+
+    .info {
+        text-align: left;
+    }
+
+    #statusButton {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}

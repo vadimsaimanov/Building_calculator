@@ -1,0 +1,65 @@
+body {
+    background-color: #fff;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin-top: -60px;
+}
+
+.login-container img {
+    max-width: 15%;
+    height: auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.login-container input {
+    margin: 5px 0;
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-container button {
+    margin-top: 10px;
+    width: 100px;
+}
+
+.login-container .input-with-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 5px 0;
+}
+
+.login-container .input-with-icon .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.login-container .input-with-icon .input-group i {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Стили для ошибок */
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.8em;
+    margin-left: 0; /* Убираем отступ слева */
+    margin-top: 2px;
+    margin-bottom: 5px;
+    width: 200px;
+    padding-left: 3px; /* Добавляем padding вместо margin для выравнивания */
+    box-sizing: border-box;
+}
+

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/client_card.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/javascripts/scriptsClientCard.js"></script>
+    <link rel="icon" href="/images/LogoWhite.png" type="image/png">
+    <title>Карточка клиента</title>
+</head>
+<body onload="onLoadClientCard()">
+<div class="header">
+    <!-- Логотип и информация о клиенте -->
+    <div class="logo-and-client-info">
+        <img id="logo" src="../images/Logo.png" alt="Logo">
+        <div class="client-info">
+            <p><strong>Клиент:</strong> <%= client.last_name %> <%= client.first_name %> <%= client.second_name %></p>
+            <p><strong>Адрес:</strong> <%= client.adress %></p>
+            <p><strong>Телефон:</strong> <%= client.phone %></p>
+        </div>
+        <div class="exit">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть" onclick="goBack()"></button>
+        </div>
+    </div>
+
+    <!-- Блок с действиями (стрелка и кнопка) -->
+    <div class="actions">
+        <i class="bi bi-arrow-left" onclick="goBack()"></i>
+        <div>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createCalculationModal">
+                Создать расчет
+            </button>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createClientDeletionModal">
+                Удалить клиента
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Заголовок "Карточка клиента" -->
+    <h1>Карточка клиента</h1>
+
+    <!-- Блок с именем и должностью -->
+    <div class="info">
+        <p id="name">Имя Фамилия</p>
+        <p id="user-status">Должность</p>
+    </div>
+</div>
+
+<!-- Тело страницы с блоками расчетов -->
+<div class="client-grid">
+    <% if (calculations.length > 0) { %>
+        <% calculations.forEach(calculation => { %>
+            <div class="calculation-base">
+                <div class="calculation"  onclick="openCalculationPage(<%= calculation.customer_id %>, <%= calculation.calculation_id %>)">
+                    <div class="calculation-number">Расчёт № <%= calculation.number %></div>
+                    <div class="calculation-date"><%= calculation.created_date %></div>
+                    <div class="calculation-status"><%= calculation.status %></div>
+                    <div class="calculation-address"><%= calculation.address_object_constractions %></div>
+                </div>
+                <div class="calculation-actions">
+                    <i class="bi bi-copy" onclick="duplicateCalculation(<%= calculation.customer_id %>, <%= calculation.calculation_id %>)"></i>
+                    <i class="bi bi-trash" onclick="deleteCalculation(<%= calculation.customer_id %>, <%= calculation.calculation_id %>)"></i>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>Нет расчётов для отображения</p>
+    <% } %>
+<!--    <div class="calculation" onclick="openCalculationPage(1)">-->
+<!--        <div class="calculation-number">Расчет №1</div>-->
+<!--        <div class="calculation-date">02.02.2021</div>-->
+<!--        <div class="calculation-status">Актуален</div>-->
+<!--        <div class="calculation-address">г. Ульяновск, ул. Тестовая, д. 35-45</div>-->
+<!--        <div class="calculation-actions">-->
+<!--            <i class="bi bi-copy"></i>-->
+<!--            <i class="bi bi-trash"></i>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="calculation" onclick="openCalculationPage(2)">-->
+<!--        <div class="calculation-number">Расчет №2</div>-->
+<!--        <div class="calculation-date">03.03.2022</div>-->
+<!--        <div class="calculation-status">Не актуален</div>-->
+<!--        <div class="calculation-address">г. Ульяновск, ул. Ленина, д. 5</div>-->
+<!--        <div class="calculation-actions">-->
+<!--            <i class="bi bi-copy"></i>-->
+<!--            <i class="bi bi-trash"></i>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="calculation" onclick="openCalculationPage(3)">-->
+<!--        <div class="calculation-number">Расчет №3</div>-->
+<!--        <div class="calculation-date">04.04.2023</div>-->
+<!--        <div class="calculation-status">Заключен договор</div>-->
+<!--        <div class="calculation-address">г. Ульяновск, ул. Строителей, д. 10</div>-->
+<!--        <div class="calculation-actions">-->
+<!--            <i class="bi bi-copy"></i>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- Модальное окно для выбора конструктивного элемента -->
+<div class="modal fade" id="createCalculationModal" tabindex="-1" aria-labelledby="createCalculationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createCalculationModalLabel">Выбор конструктивного элемента</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-column align-items-start">
+                    <button type="button" class="btn btn-light d-flex align-items-center" onclick="openCarcasPage(<%= client.id %>)">
+                        <i class="bi bi-house-add me-2"></i> Каркас
+                    </button>
+                    <button type="button" class="btn btn-light d-flex align-items-center mt-2">
+                        <i class="bi bi-house-add me-2"></i> Фундамент
+                    </button>
+                    <button type="button" class="btn btn-light d-flex align-items-center mt-2">
+                        <i class="bi bi-house-add me-2"></i> Крыша
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Модальное окно для выбора конструктивного элемента -->
+<div class="modal fade" id="createClientDeletionModal" tabindex="-1" aria-labelledby="createClientDeletionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createClientDeletionModalLabel">Удалить клиента <%= client.first_name + ' ' + client.second_name + ' ' + client.last_name%>?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="deleteClient(<%= client.id%>)">Удалить</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,595 @@
+/* Основные стили для шапки */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+    position: relative;
+    min-height: 120px; /* Устанавливаем как в client.css */
+}
+
+/* Контейнер для логотипа и информации о клиенте */
+.logo-and-client-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Стили для логотипа */
+#logo {
+    max-width: 100px;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    #logo {
+        max-width: 10%;
+    }
+}
+
+/* Блок с информацией о клиенте */
+.client-info {
+    text-align: left;
+    flex: 1;
+}
+
+.client-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.client-info strong {
+    font-weight: bold;
+}
+
+/* Заголовок "Каркас" */
+h1 {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+.exit {
+    position: absolute;
+    top: 10px; /* Как в client.css */
+    right: 10px; /* Как в client.css */
+    z-index: 10; /* Устанавливаем выше других элементов */
+}
+
+.info {
+    position: absolute;
+    top: 70px; /* Как в client.css */
+    right: 60px; /* Как в client.css */
+    text-align: right;
+    min-width: 150px; /* Как в client.css */
+    max-width: 300px; /* Как в client.css */
+    white-space: normal; /* Как в client.css */
+    word-wrap: break-word; /* Как в client.css */
+}
+
+.info p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.2; /* Как в client.css */
+}
+
+.info p:first-child {
+    margin-bottom: 5px; /* Как в client.css */
+}
+
+/* Стили для блока с действиями (стрелка) */
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+/* Иконка стрелки */
+.bi-arrow-left {
+    font-size: 25px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.bi-arrow-left:hover {
+    color: #0056b3;
+}
+
+
+
+
+
+
+/* Основные стили для контейнера с исходными данными */
+.source-data-container {
+    padding: 20px 40px; /* Отступы слева и справа */
+}
+
+/* Отступы для заголовков */
+.source-data-container h2,
+.source-data-container h3,
+.source-data-container h4 {
+    margin-bottom: 20px;
+}
+
+/* Отступы между разделами */
+.spacer {
+    margin-bottom: 20px;
+}
+
+/* Стили для формы */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Отступ между названием колонки и инпут полем */
+}
+
+/* Стили для полей ввода и селекторов */
+.form-control {
+    width: 150px; /* Фиксированная ширина полей ввода и селекторов */
+    min-width: 100px; /* Минимальная ширина */
+    max-width: 300px; /* Максимальная ширина */
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+/* Стили для единиц измерения */
+.unit {
+    font-size: 14px;
+}
+
+/* Стили для иконок */
+.add-calculation i {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Стили для подзаголовков */
+.subsection span {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Стили для кнопки */
+.btn-primary {
+    margin-top: 10px; /* Уменьшаем отступ сверху */
+}
+
+/* Стили для скрытых элементов */
+.hidden {
+    display: none;
+}
+
+/* Стили для заголовков этажей */
+.floor-data h5 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Стили для заголовков оконных проёмов */
+.subsection h5 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Стили для кнопок добавления */
+.btn-secondary {
+    margin-top: 10px;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Стили для невалидных полей */
+.form-control:invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+}
+
+/* Стили для динамически добавляемых сообщений об ошибках */
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+/* Добавляем в конец файла стилей */
+
+/* Стили для групп окон и дверей */
+.window-group, .door-group {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* Стили для кнопок удаления */
+.delete-btn {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Улучшаем отступы в формах */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Стили для невалидных полей */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .window-group, .door-group {
+        padding: 10px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-control {
+        width: 100% !important;
+    }
+}
+/* Стили для групп окон и дверей */
+.window-group, .door-group {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+/* Стили для кнопок удаления */
+.delete-btn {
+    margin-top: 15px;
+    padding: 8px 15px;
+    width: auto;
+    display: inline-block;
+}
+
+/* Улучшенные отступы в формах */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Стили для невалидных полей */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .window-group, .door-group {
+        padding: 10px;
+    }
+
+    .delete-btn {
+        margin-top: 10px;
+    }
+}
+/* carcas.css */
+
+/* Общие стили для формы */
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+/* Стили для обязательных полей */
+label[required]::after {
+    content: " *";
+    color: #dc3545;
+}
+
+/* Стили для групп */
+.window-group, .door-group {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+/* Кнопки удаления */
+.delete-btn {
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Ошибки */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 5px;
+    display: none;
+}
+
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .delete-btn {
+        width: 100%;
+    }
+}
+
+/* Стили для валидации */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Подсветка обязательных полей */
+.required-field::after {
+    content: " *";
+    color: #dc3545;
+}
+
+/* Стили для групп с ошибками */
+.has-error {
+    border-left: 3px solid #dc3545;
+    padding-left: 10px;
+}
+
+/* Адаптивные стили для сообщений об ошибках */
+@media (max-width: 768px) {
+    .invalid-feedback {
+        font-size: 0.75em;
+    }
+}
+/* Общие стили для формы */
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+/* Стили для обязательных полей */
+label[required]::after {
+    content: " *";
+    color: #dc3545;
+}
+
+/* Стили для групп */
+.window-group, .door-group {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+/* Кнопки удаления */
+.delete-btn {
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Ошибки */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 5px;
+    display: none;
+}
+
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .delete-btn {
+        width: 100%;
+    }
+}
+
+/* Стили для валидации */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Подсветка обязательных полей */
+.required-field::after {
+    content: " *";
+    color: #dc3545;
+}
+
+/* Стили для групп с ошибками */
+.has-error {
+    border-left: 3px solid #dc3545;
+    padding-left: 10px;
+}
+
+/* Адаптивные стили для сообщений об ошибках */
+@media (max-width: 768px) {
+    .invalid-feedback {
+        font-size: 0.75em;
+    }
+}
+
+/* Стили для контейнера адреса */
+.address-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.address-input-container .form-control {
+    width: 300px; /* Возвращаем прежний размер */
+    padding: 5px;
+    font-size: 14px;
+}
+
+/* Стили для кнопок в контейнере адреса */
+.address-input-container .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Стили для сообщения об ошибке */
+#addressInput-error {
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* Убедитесь, что кнопки остаются на своих местах */
+.address-input-container .btn {
+    order: 2; /* Кнопки должны быть после поля ввода и сообщения об ошибке */
+}
+
+/* Стили для контейнера адреса */
+.address-input-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: flex-start; /* Выравнивание по верхней границе */
+    padding: 20px;
+    text-align: center;
+}
+
+.address-input-container .form-control {
+    width: 300px; /* Возвращаем прежний размер */
+    padding: 5px;
+    font-size: 14px;
+}
+
+/* Стили для кнопок в контейнере адреса */
+.address-input-container .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    align-self: flex-start; /* Убедитесь, что кнопки находятся на одной линии с полем ввода */
+}
+
+/* Стили для сообщения об ошибке */
+#addressInput-error {
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    order: 3; /* Убедитесь, что сообщение об ошибке всегда находится внизу */
+}
